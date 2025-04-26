@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Default theme */
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 191 100% 50%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 271 100% 50%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+  --radius: 0.5rem;
+
+  /* Custom Glacium theme colors */
+  --deep-space: 240 43% 8%;
+  --midnight: 240 26% 23%;
+  --neon-cyan: 180 100% 50%;
+  --electric-purple: 276 100% 50%;
+  
+  /* Chart colors */
+  --chart-1: var(--neon-cyan);
+  --chart-2: var(--electric-purple);
+  --chart-3: 200 100% 60%;
+  --chart-4: 250 100% 60%;
+  --chart-5: 320 100% 60%;
+  
+  /* Sidebar colors */
+  --sidebar-background: var(--deep-space);
+  --sidebar-foreground: 0 0% 100%;
+  --sidebar-primary: var(--neon-cyan);
+  --sidebar-primary-foreground: var(--deep-space);
+  --sidebar-accent: var(--electric-purple);
+  --sidebar-accent-foreground: 0 0% 100%;
+  --sidebar-border: 240 13% 25%;
+  --sidebar-ring: var(--neon-cyan);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    @apply bg-deep-space text-foreground;
+    overflow-x: hidden;
+  }
+
+  code, pre, .font-code {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .glass {
+    @apply bg-white/5 backdrop-blur-md border border-white/10;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-neon-cyan to-electric-purple bg-clip-text text-transparent;
+  }
+  
+  .gradient-border {
+    @apply relative;
+  }
+  
+  .gradient-border::before {
+    content: "";
+    @apply absolute -inset-[1px] bg-gradient-to-r from-neon-cyan via-electric-purple to-neon-cyan rounded-lg -z-10;
+    background-size: 200% 200%;
+    animation: gradient 8s ease infinite;
+  }
+
+  .animate-gradient {
+    @apply bg-gradient-to-r from-neon-cyan via-electric-purple to-neon-cyan;
+    background-size: 200% 200%;
+    animation: gradient 8s ease infinite;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.5), 0 0 10px rgba(0, 255, 255, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(0, 255, 255, 0.8), 0 0 20px rgba(0, 255, 255, 0.5), 0 0 30px rgba(0, 255, 255, 0.3);
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+.nav-item {
+  position: relative;
+}
+
+.nav-item::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, hsl(var(--neon-cyan)), hsl(var(--electric-purple)));
+  transition: width 0.3s ease;
+}
+
+.nav-item:hover::after {
+  width: 100%;
+}
+
+.circuit-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M36 34c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' stroke='rgba(255, 255, 255, 0.1)' stroke-width='2'/%3E%3Cpath d='M13 18a3 3 0 100-6 3 3 0 000 6' stroke='rgba(0, 255, 255, 0.2)' stroke-width='1'/%3E%3Cpath d='M52 42a2 2 0 100-4 2 2 0 000 4' stroke='rgba(157, 0, 255, 0.2)' stroke-width='1'/%3E%3Cpath d='M10 28h8M28 10v8' stroke='rgba(255, 255, 255, 0.1)' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E");
+}
