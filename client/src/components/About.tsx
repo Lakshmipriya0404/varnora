@@ -511,10 +511,27 @@ const About = forwardRef<HTMLElement>((props, ref) => {
                 {/* Animated circuit lines */}
                 <div className="absolute inset-0 overflow-hidden">
                   <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 300 300">
+                    <defs>
+                      <clipPath id="circuitClip">
+                        <rect x="50" y="50" width="200" height="200" rx="8" />
+                      </clipPath>
+                    </defs>
+                    
+                    {/* Background image */}
+                    <image 
+                      href="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=300"
+                      x="50" 
+                      y="50" 
+                      width="200" 
+                      height="200"
+                      clipPath="url(#circuitClip)"
+                      opacity="0.7"
+                    />
+                    
                     <motion.path 
                       d="M50,50 L100,50 L150,100 L200,100 L250,50" 
-                      stroke="hsla(var(--neon-cyan), 0.3)" 
-                      strokeWidth="1" 
+                      stroke="hsla(var(--neon-cyan), 0.5)" 
+                      strokeWidth="2" 
                       fill="none"
                       initial={{ pathLength: 0, opacity: 0 }}
                       animate={{ pathLength: 1, opacity: 1 }}
@@ -522,8 +539,8 @@ const About = forwardRef<HTMLElement>((props, ref) => {
                     />
                     <motion.path 
                       d="M50,150 L100,150 L150,100 L200,100 L250,150" 
-                      stroke="hsla(var(--electric-purple), 0.3)" 
-                      strokeWidth="1" 
+                      stroke="hsla(var(--electric-purple), 0.5)" 
+                      strokeWidth="2" 
                       fill="none"
                       initial={{ pathLength: 0, opacity: 0 }}
                       animate={{ pathLength: 1, opacity: 1 }}
@@ -531,8 +548,8 @@ const About = forwardRef<HTMLElement>((props, ref) => {
                     />
                     <motion.path 
                       d="M50,250 L100,250 L150,200 L200,200 L250,250" 
-                      stroke="hsla(var(--neon-cyan), 0.3)" 
-                      strokeWidth="1" 
+                      stroke="hsla(var(--neon-cyan), 0.5)" 
+                      strokeWidth="2" 
                       fill="none"
                       initial={{ pathLength: 0, opacity: 0 }}
                       animate={{ pathLength: 1, opacity: 1 }}
@@ -540,8 +557,8 @@ const About = forwardRef<HTMLElement>((props, ref) => {
                     />
                     <motion.path 
                       d="M50,50 L50,100 L100,150 L100,200 L50,250" 
-                      stroke="hsla(var(--electric-purple), 0.3)" 
-                      strokeWidth="1" 
+                      stroke="hsla(var(--electric-purple), 0.5)" 
+                      strokeWidth="2" 
                       fill="none"
                       initial={{ pathLength: 0, opacity: 0 }}
                       animate={{ pathLength: 1, opacity: 1 }}
@@ -549,8 +566,8 @@ const About = forwardRef<HTMLElement>((props, ref) => {
                     />
                     <motion.path 
                       d="M250,50 L250,100 L200,150 L200,200 L250,250" 
-                      stroke="hsla(var(--neon-cyan), 0.3)" 
-                      strokeWidth="1" 
+                      stroke="hsla(var(--neon-cyan), 0.5)" 
+                      strokeWidth="2" 
                       fill="none"
                       initial={{ pathLength: 0, opacity: 0 }}
                       animate={{ pathLength: 1, opacity: 1 }}
