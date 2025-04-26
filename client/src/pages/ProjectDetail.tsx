@@ -33,7 +33,7 @@ const ProjectDetail = () => {
   
   if (!project) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-deep-space">
+      <div className={`fixed inset-0 flex items-center justify-center ${isDark ? 'bg-deep-space' : 'bg-gray-100'}`}>
         <div className="w-20 h-20 rounded-full border-4 border-t-neon-cyan border-r-electric-purple border-b-neon-cyan border-l-electric-purple animate-spin"></div>
       </div>
     );
@@ -41,7 +41,7 @@ const ProjectDetail = () => {
   
   return (
     <motion.div 
-      className="bg-deep-space min-h-screen"
+      className={`${isDark ? 'bg-deep-space' : 'bg-gray-50'} min-h-screen`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -58,7 +58,7 @@ const ProjectDetail = () => {
           transition={{ duration: 1.5 }}
           style={{ backgroundImage: `url(${project.image})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-deep-space via-deep-space/80 to-transparent"></div>
+        <div className={`absolute inset-0 bg-gradient-to-t ${isDark ? 'from-deep-space via-deep-space/80' : 'from-gray-50 via-gray-100/80'} to-transparent`}></div>
         
         {/* Back to portfolio button */}
         <div className="absolute top-8 left-8 z-10">
@@ -78,7 +78,7 @@ const ProjectDetail = () => {
           <div className="container mx-auto">
             <span className="font-code text-neon-cyan text-sm mb-2 block">{project.tags.join(" · ")}</span>
             <h1 className="text-4xl md:text-6xl font-bold gradient-text mb-2">{project.title}</h1>
-            <h2 className="text-xl md:text-2xl text-white/80">{project.subtitle}</h2>
+            <h2 className={`text-xl md:text-2xl ${isDark ? 'text-white/80' : 'text-gray-700'}`}>{project.subtitle}</h2>
           </div>
         </div>
         
