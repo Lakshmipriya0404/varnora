@@ -191,7 +191,7 @@ const ProjectDetail = ({ projectId, onClose }: { projectId: string, onClose: () 
   
   return (
     <motion.div 
-      className="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden bg-deep-space/80 backdrop-blur-md"
+      className={`fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden ${isDark ? 'bg-deep-space/80' : 'bg-gray-900/50'} backdrop-blur-md`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -206,7 +206,7 @@ const ProjectDetail = ({ projectId, onClose }: { projectId: string, onClose: () 
         {/* Glowing border */}
         <div className="absolute inset-0 bg-gradient-to-r from-neon-cyan via-electric-purple to-neon-cyan animate-gradient rounded-xl"></div>
         
-        <div className="relative bg-deep-space rounded-lg overflow-hidden max-h-[90vh] overflow-y-auto cyber-dots">
+        <div className={`relative ${isDark ? 'bg-deep-space' : 'bg-white'} rounded-lg overflow-hidden max-h-[90vh] overflow-y-auto cyber-dots`}>
           {/* Close button */}
           <button 
             className="absolute top-4 right-4 z-20 p-2 rounded-full glass hover:bg-white/10 transition-colors"
@@ -227,7 +227,9 @@ const ProjectDetail = ({ projectId, onClose }: { projectId: string, onClose: () 
                 className="absolute inset-0 bg-cover bg-center" 
                 style={{ backgroundImage: `url(${project.image})` }}
               ></div>
-              <div className="absolute inset-0 bg-gradient-to-t from-deep-space via-deep-space/60 to-transparent"></div>
+              <div className={`absolute inset-0 bg-gradient-to-t ${isDark 
+                ? 'from-deep-space via-deep-space/60' 
+                : 'from-gray-800 via-gray-800/60'} to-transparent`}></div>
             </motion.div>
             
             <div className="absolute bottom-0 left-0 p-8 w-full">
@@ -310,7 +312,7 @@ const ProjectDetail = ({ projectId, onClose }: { projectId: string, onClose: () 
                 {project.results.map((result, idx) => (
                   <motion.div 
                     key={idx}
-                    className="bg-deep-space border border-neon-cyan/20 rounded-lg p-6 text-center cyberpunk-slash"
+                    className={`${isDark ? 'bg-deep-space' : 'bg-white/80'} border border-neon-cyan/20 rounded-lg p-6 text-center cyberpunk-slash`}
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ delay: idx * 0.2 }}
@@ -378,7 +380,11 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({ item, index, onClick }) =
       />
       
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-deep-space via-deep-space/80 to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
+      <div className={`absolute inset-0 bg-gradient-to-t ${
+        isDark 
+          ? 'from-deep-space via-deep-space/80' 
+          : 'from-gray-800 via-gray-800/80'
+      } to-transparent opacity-70 group-hover:opacity-90 transition-opacity duration-300`}></div>
       
       {/* Content */}
       <div className="absolute inset-0 flex flex-col justify-end p-6 text-white">
@@ -428,13 +434,15 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({ item, index, onClick }) =
   );
 };
 
-const FilterTag = ({ tag, isActive, onClick }: { tag: string, isActive: boolean, onClick: () => void }) => {
+const FilterTag = ({ tag, isActive, onClick, isDark }: { tag: string, isActive: boolean, onClick: () => void, isDark: boolean }) => {
   return (
     <button
       className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
         isActive 
           ? 'bg-gradient-to-r from-neon-cyan to-electric-purple text-white' 
-          : 'bg-white/5 text-white/70 hover:bg-white/10'
+          : isDark 
+            ? 'bg-white/5 text-white/70 hover:bg-white/10'
+            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
       }`}
       onClick={onClick}
     >
@@ -448,6 +456,7 @@ const Portfolio = forwardRef<HTMLElement>((props, ref) => {
   const [selectedProject, setSelectedProject] = useState<string | null>(null);
   const [location, setLocation] = useLocation();
   const { theme } = useTheme();
+  const isDark = theme === 'dark';
   
   const { scrollYProgress } = useScroll({ target: ref as any });
   const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
@@ -487,11 +496,15 @@ const Portfolio = forwardRef<HTMLElement>((props, ref) => {
       <section 
         id="portfolio" 
         ref={ref}
-        className="py-20 md:py-32 relative bg-deep-space overflow-hidden"
+        className={`py-20 md:py-32 relative ${isDark ? 'bg-deep-space' : 'bg-gray-50'} overflow-hidden`}
       >
         {/* Futuristic background elements */}
         <div className="absolute inset-0 cyber-dots opacity-30 pointer-events-none"></div>
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-deep-space to-deep-space/80 pointer-events-none"></div>
+        <div className={`absolute inset-0 bg-gradient-to-b from-transparent ${
+          isDark 
+            ? 'via-deep-space to-deep-space/80' 
+            : 'via-gray-50 to-gray-100/90'
+        } pointer-events-none`}></div>
         
         {/* Glowing accents */}
         <div className="absolute top-1/4 -left-20 w-64 h-64 rounded-full bg-electric-purple/10 filter blur-[100px] pointer-events-none"></div>
@@ -536,7 +549,7 @@ const Portfolio = forwardRef<HTMLElement>((props, ref) => {
               />
             </h2>
             
-            <p className="text-gray-300 max-w-2xl mx-auto">
+            <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
               Explore our latest projects that showcase our expertise in creating impactful digital experiences.
             </p>
           </motion.div>
@@ -549,6 +562,7 @@ const Portfolio = forwardRef<HTMLElement>((props, ref) => {
                 tag={filter}
                 isActive={activeFilter === filter}
                 onClick={() => setActiveFilter(filter)}
+                isDark={isDark}
               />
             ))}
           </div>
@@ -603,7 +617,7 @@ const Portfolio = forwardRef<HTMLElement>((props, ref) => {
               }}
             >
               <motion.div
-                className="inline-block px-8 py-3 rounded-md glass border border-neon-cyan/30 text-white font-semibold relative group overflow-hidden cursor-pointer"
+                className={`inline-block px-8 py-3 rounded-md glass border border-neon-cyan/30 ${isDark ? 'text-white' : 'text-gray-800'} font-semibold relative group overflow-hidden cursor-pointer`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >

@@ -263,7 +263,7 @@ const Hero = forwardRef<HTMLElement>((props, ref) => {
           {/* Futuristic heading with clipped corners */}
           <div className="relative mb-6">
             <div className="absolute -inset-1 bg-gradient-to-r from-neon-cyan/50 to-electric-purple/50 rounded-md blur-md"></div>
-            <h1 className="relative text-5xl md:text-7xl font-bold bg-deep-space p-2 rounded-md">
+            <h1 className={`relative text-5xl md:text-7xl font-bold ${theme === 'dark' ? 'bg-deep-space' : 'bg-white/70'} p-2 rounded-md`}>
               We create <span className="gradient-text">digital</span> <br/>
               experiences that <br/>
               <AnimatedText 
