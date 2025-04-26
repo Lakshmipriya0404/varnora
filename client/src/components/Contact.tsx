@@ -124,7 +124,11 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                       <FormControl>
                         <Input 
                           placeholder="Your name" 
-                          className="w-full px-4 py-2 rounded-md bg-midnight/50 border border-white/10 focus:border-neon-cyan" 
+                          className={`w-full px-4 py-2 rounded-md ${
+                            isDark 
+                              ? 'bg-midnight/50 border-white/10 focus:border-neon-cyan text-white' 
+                              : 'bg-gray-100/70 border-gray-300 focus:border-electric-purple text-gray-800'
+                          } border focus:ring-2 focus:ring-neon-cyan/20 transition-all`} 
                           {...field} 
                         />
                       </FormControl>
@@ -142,7 +146,11 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                       <FormControl>
                         <Input 
                           placeholder="your@email.com" 
-                          className="w-full px-4 py-2 rounded-md bg-midnight/50 border border-white/10 focus:border-neon-cyan" 
+                          className={`w-full px-4 py-2 rounded-md ${
+                            isDark 
+                              ? 'bg-midnight/50 border-white/10 focus:border-neon-cyan text-white' 
+                              : 'bg-gray-100/70 border-gray-300 focus:border-electric-purple text-gray-800'
+                          } border focus:ring-2 focus:ring-neon-cyan/20 transition-all`} 
                           {...field} 
                         />
                       </FormControl>
@@ -160,7 +168,11 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                       <FormControl>
                         <Input 
                           placeholder="What's this about?" 
-                          className="w-full px-4 py-2 rounded-md bg-midnight/50 border border-white/10 focus:border-neon-cyan" 
+                          className={`w-full px-4 py-2 rounded-md ${
+                            isDark 
+                              ? 'bg-midnight/50 border-white/10 focus:border-neon-cyan text-white' 
+                              : 'bg-gray-100/70 border-gray-300 focus:border-electric-purple text-gray-800'
+                          } border focus:ring-2 focus:ring-neon-cyan/20 transition-all`} 
                           {...field} 
                         />
                       </FormControl>
@@ -178,7 +190,11 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                       <FormControl>
                         <Textarea 
                           placeholder="Tell us about your project..." 
-                          className="w-full px-4 py-2 rounded-md bg-midnight/50 border border-white/10 focus:border-neon-cyan"
+                          className={`w-full px-4 py-2 rounded-md ${
+                            isDark 
+                              ? 'bg-midnight/50 border-white/10 focus:border-neon-cyan text-white' 
+                              : 'bg-gray-100/70 border-gray-300 focus:border-electric-purple text-gray-800'
+                          } border focus:ring-2 focus:ring-neon-cyan/20 transition-all`}
                           rows={5}
                           {...field} 
                         />
@@ -216,7 +232,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                   </div>
                   <div>
                     <h4 className="font-medium">Phone</h4>
-                    <p className="text-gray-300">+1 (555) 123-4567</p>
+                    <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>+1 (555) 123-4567</p>
                   </div>
                 </div>
                 
@@ -226,7 +242,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                   </div>
                   <div>
                     <h4 className="font-medium">Email</h4>
-                    <p className="text-gray-300">hello@glacium.com</p>
+                    <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>hello@glacium.com</p>
                   </div>
                 </div>
                 
@@ -236,7 +252,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                   </div>
                   <div>
                     <h4 className="font-medium">Location</h4>
-                    <p className="text-gray-300">123 Innovation Drive, San Francisco, CA 94103</p>
+                    <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>123 Innovation Drive, San Francisco, CA 94103</p>
                   </div>
                 </div>
               </div>
@@ -244,17 +260,17 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
               <div className="mt-8">
                 <h4 className="font-medium mb-4">Follow Us</h4>
                 <div className="flex space-x-4">
-                  <a href="#" className="h-10 w-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors">
-                    <Twitter className="h-5 w-5 text-white" />
+                  <a href="#" className={`h-10 w-10 rounded-full ${isDark ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-200/50 hover:bg-gray-200/80'} flex items-center justify-center transition-colors`}>
+                    <Twitter className={`h-5 w-5 ${isDark ? 'text-white' : 'text-gray-700'}`} />
                   </a>
-                  <a href="#" className="h-10 w-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors">
-                    <Instagram className="h-5 w-5 text-white" />
+                  <a href="#" className={`h-10 w-10 rounded-full ${isDark ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-200/50 hover:bg-gray-200/80'} flex items-center justify-center transition-colors`}>
+                    <Instagram className={`h-5 w-5 ${isDark ? 'text-white' : 'text-gray-700'}`} />
                   </a>
-                  <a href="#" className="h-10 w-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors">
-                    <Linkedin className="h-5 w-5 text-white" />
+                  <a href="#" className={`h-10 w-10 rounded-full ${isDark ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-200/50 hover:bg-gray-200/80'} flex items-center justify-center transition-colors`}>
+                    <Linkedin className={`h-5 w-5 ${isDark ? 'text-white' : 'text-gray-700'}`} />
                   </a>
-                  <a href="#" className="h-10 w-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors">
-                    <Github className="h-5 w-5 text-white" />
+                  <a href="#" className={`h-10 w-10 rounded-full ${isDark ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-200/50 hover:bg-gray-200/80'} flex items-center justify-center transition-colors`}>
+                    <Github className={`h-5 w-5 ${isDark ? 'text-white' : 'text-gray-700'}`} />
                   </a>
                 </div>
               </div>
@@ -268,7 +284,9 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
               viewport={{ once: true, margin: "-100px" }}
             >
               {/* Map placeholder */}
-              <div className="w-full h-full rounded bg-midnight/70 flex items-center justify-center">
+              <div className={`w-full h-full rounded ${
+                isDark ? 'bg-midnight/70' : 'bg-gray-200/70'
+              } flex items-center justify-center`}>
                 <div className="text-center">
                   <svg 
                     xmlns="http://www.w3.org/2000/svg" 
@@ -284,7 +302,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                       d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" 
                     />
                   </svg>
-                  <p className="text-gray-400 mt-2">Interactive Map</p>
+                  <p className={`mt-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Interactive Map</p>
                 </div>
               </div>
             </motion.div>
