@@ -153,7 +153,7 @@
   
   /* Glass effect for light theme */
   .light .glass {
-    @apply bg-white/70 border border-slate-200/50 shadow-sm;
+    @apply bg-white/80 border border-slate-200/60 shadow-sm backdrop-blur-md bg-gradient-to-br from-white/90 to-white/60;
   }
   
   .glassmorphism {
@@ -167,7 +167,7 @@
   
   /* Glassmorphism effect for light theme */
   .light .glassmorphism {
-    @apply bg-white/80 border border-slate-200/50 shadow-md;
+    @apply bg-white/80 border border-slate-200/60 shadow-md bg-gradient-to-br from-blue-50/30 to-white/70;
   }
   
   .gradient-text {

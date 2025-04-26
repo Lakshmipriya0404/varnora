@@ -41,7 +41,7 @@ const ProjectDetail = () => {
   
   return (
     <motion.div 
-      className={`${isDark ? 'bg-deep-space' : 'bg-gray-50'} min-h-screen`}
+      className={`${isDark ? 'bg-deep-space' : 'bg-gradient-to-b from-blue-50 to-gray-100'} min-h-screen`}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -58,7 +58,11 @@ const ProjectDetail = () => {
           transition={{ duration: 1.5 }}
           style={{ backgroundImage: `url(${project.image})` }}
         />
-        <div className={`absolute inset-0 bg-gradient-to-t ${isDark ? 'from-deep-space via-deep-space/80' : 'from-gray-50 via-gray-100/80'} to-transparent`}></div>
+        <div className={`absolute inset-0 bg-gradient-to-t ${
+          isDark 
+            ? 'from-deep-space via-deep-space/80' 
+            : 'from-blue-50 via-blue-50/80 to-transparent'
+        }`}></div>
         
         {/* Back to portfolio button */}
         <div className="absolute top-8 left-8 z-10">
@@ -251,13 +255,13 @@ const ProjectDetail = () => {
                   <h3 className="text-xl font-bold mb-4">Key Features</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {project.highlights.map((highlight, idx) => (
-                      <div key={idx} className="glass p-4 rounded-lg bg-white/5">
+                      <div key={idx} className={`glass p-4 rounded-lg ${isDark ? 'bg-white/5' : 'bg-blue-50/30'}`}>
                         <div className="flex items-start">
                           <div className="w-10 h-10 rounded-full bg-gradient-to-br from-neon-cyan to-electric-purple flex items-center justify-center flex-shrink-0 mr-3">
-                            <span className="font-bold">{idx + 1}</span>
+                            <span className="font-bold text-white">{idx + 1}</span>
                           </div>
                           <div>
-                            <p>{highlight}</p>
+                            <p className={isDark ? '' : 'text-gray-700'}>{highlight}</p>
                           </div>
                         </div>
                       </div>
