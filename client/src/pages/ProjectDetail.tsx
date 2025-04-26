@@ -159,19 +159,19 @@ const ProjectDetail = () => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <div>
                   <h2 className="text-3xl font-bold mb-6 gradient-text">Project Overview</h2>
-                  <p className="text-lg leading-relaxed text-white/80 mb-8">
+                  <p className={`text-lg leading-relaxed ${isDark ? 'text-white/80' : 'text-gray-700'} mb-8`}>
                     {project.fullDescription}
                   </p>
                   
                   <div className="space-y-6">
                     <div>
                       <h3 className="text-xl font-bold mb-3">The Challenge</h3>
-                      <p className="text-white/70">{project.challenge}</p>
+                      <p className={isDark ? 'text-white/70' : 'text-gray-600'}>{project.challenge}</p>
                     </div>
                     
                     <div>
                       <h3 className="text-xl font-bold mb-3">Our Solution</h3>
-                      <p className="text-white/70">{project.solution}</p>
+                      <p className={isDark ? 'text-white/70' : 'text-gray-600'}>{project.solution}</p>
                     </div>
                   </div>
                 </div>
@@ -202,7 +202,7 @@ const ProjectDetail = () => {
               {/* Testimonial */}
               <div className="glass rounded-lg p-8 border-l-4 border-electric-purple max-w-3xl mx-auto">
                 <blockquote className="text-lg italic mb-4">"{project.testimonial.text}"</blockquote>
-                <footer className="text-right text-white/70">— {project.testimonial.author}</footer>
+                <footer className={`text-right ${isDark ? 'text-white/70' : 'text-gray-600'}`}>— {project.testimonial.author}</footer>
               </div>
             </motion.div>
           )}
@@ -217,7 +217,7 @@ const ProjectDetail = () => {
             >
               <div>
                 <h2 className="text-3xl font-bold mb-6 gradient-text">Technical Implementation</h2>
-                <p className="text-lg leading-relaxed text-white/80 mb-8">
+                <p className={`text-lg leading-relaxed ${isDark ? 'text-white/80' : 'text-gray-700'} mb-8`}>
                   Our approach to implementing {project.title} involved leveraging the latest technologies and methodologies to create a robust, scalable solution that met all the client's requirements.
                 </p>
                 
@@ -238,10 +238,10 @@ const ProjectDetail = () => {
                   
                   <div className="glass rounded-lg p-6">
                     <h3 className="text-xl font-bold mb-4">Development Approach</h3>
-                    <p className="text-white/70 mb-4">
+                    <p className={`${isDark ? 'text-white/70' : 'text-gray-600'} mb-4`}>
                       We followed an agile methodology, working in close collaboration with the client throughout the development process. This allowed us to adapt quickly to changing requirements and deliver incremental value.
                     </p>
-                    <p className="text-white/70">
+                    <p className={isDark ? 'text-white/70' : 'text-gray-600'}>
                       The project was completed in {project.timeline.split(' ')[0]} sprints, with regular client reviews and feedback sessions to ensure alignment with project goals.
                     </p>
                   </div>
@@ -278,7 +278,7 @@ const ProjectDetail = () => {
             >
               <div>
                 <h2 className="text-3xl font-bold mb-6 gradient-text">Project Outcomes</h2>
-                <p className="text-lg leading-relaxed text-white/80 mb-8">
+                <p className={`text-lg leading-relaxed ${isDark ? 'text-white/80' : 'text-gray-700'} mb-8`}>
                   The implementation of {project.title} delivered significant value to the client, exceeding expectations across multiple key performance indicators.
                 </p>
                 
@@ -295,7 +295,7 @@ const ProjectDetail = () => {
                 
                 <div className="glass rounded-lg p-6 mb-12">
                   <h3 className="text-xl font-bold mb-4">Impact Analysis</h3>
-                  <p className="text-white/70 mb-4">
+                  <p className={`${isDark ? 'text-white/70' : 'text-gray-600'} mb-4`}>
                     The solution significantly improved the client's operational efficiency and customer satisfaction metrics. Key improvements include:
                   </p>
                   <ul className="space-y-2">
@@ -322,7 +322,7 @@ const ProjectDetail = () => {
                   <h3 className="text-xl font-bold mb-4">Client Testimonial</h3>
                   <div className="glass rounded-lg p-8 border-l-4 border-electric-purple">
                     <blockquote className="text-lg italic mb-4">"{project.testimonial.text}"</blockquote>
-                    <footer className="text-right text-white/70">— {project.testimonial.author}</footer>
+                    <footer className={`text-right ${isDark ? 'text-white/70' : 'text-gray-600'}`}>— {project.testimonial.author}</footer>
                   </div>
                 </div>
               </div>
@@ -355,7 +355,7 @@ const ProjectDetail = () => {
                   </div>
                   <div className="p-6">
                     <h3 className="font-bold text-xl mb-2">{relatedProject.title}</h3>
-                    <p className="text-white/70 mb-4 line-clamp-2">{relatedProject.description}</p>
+                    <p className={`${isDark ? 'text-white/70' : 'text-gray-600'} mb-4 line-clamp-2`}>{relatedProject.description}</p>
                     <div className="flex items-center text-neon-cyan group-hover:translate-x-2 transition-transform duration-300">
                       <span className="text-sm font-bold">View Project</span>
                       <ArrowLeft className="w-4 h-4 ml-2 rotate-180" />
@@ -404,18 +404,25 @@ interface TabButtonProps {
   icon: React.ReactNode;
 }
 
-const TabButton: React.FC<TabButtonProps> = ({ children, isActive, onClick, icon }) => (
-  <button
-    className={`flex items-center whitespace-nowrap px-4 py-2 rounded-md transition-all ${
-      isActive 
-        ? 'bg-gradient-to-r from-neon-cyan to-electric-purple text-white' 
-        : 'glass text-white/70 hover:text-white hover:bg-white/10'
-    }`}
-    onClick={onClick}
-  >
-    <span className="mr-2">{icon}</span>
-    <span>{children}</span>
-  </button>
-);
+const TabButton: React.FC<TabButtonProps> = ({ children, isActive, onClick, icon }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  
+  return (
+    <button
+      className={`flex items-center whitespace-nowrap px-4 py-2 rounded-md transition-all ${
+        isActive 
+          ? 'bg-gradient-to-r from-neon-cyan to-electric-purple text-white' 
+          : isDark
+            ? 'glass text-white/70 hover:text-white hover:bg-white/10'
+            : 'glass text-gray-700 hover:text-gray-900 hover:bg-gray-200/30'
+      }`}
+      onClick={onClick}
+    >
+      <span className="mr-2">{icon}</span>
+      <span>{children}</span>
+    </button>
+  );
+};
 
 export default ProjectDetail;
