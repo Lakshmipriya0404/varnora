@@ -42,10 +42,10 @@ export default function ParticleBackground() {
         "rgba(0, 150, 255, alpha)", // blue
       ]
     : [
-        "rgba(0, 210, 255, alpha)", // lighter cyan
-        "rgba(157, 0, 255, alpha)", // purple
-        "rgba(50, 50, 80, alpha)", // dark blue
-        "rgba(0, 90, 210, alpha)", // blue
+        "rgba(0, 180, 216, alpha)", // cyan (lighter)
+        "rgba(138, 43, 226, alpha)", // purple (lighter)
+        "rgba(70, 130, 180, alpha)", // steel blue
+        "rgba(30, 144, 255, alpha)", // dodger blue
       ];
   
   useEffect(() => {
@@ -76,7 +76,8 @@ export default function ParticleBackground() {
       particlesRef.current = Array.from({ length: count }, () => {
         const size = random(1, 5);
         const colorIndex = Math.floor(random(0, particleColors.length));
-        const opacity = random(0.1, 0.6);
+        // Higher opacity range for light theme
+        const opacity = isDark ? random(0.1, 0.6) : random(0.2, 0.7);
         const color = particleColors[colorIndex].replace('alpha', opacity.toString());
         
         return {
@@ -183,11 +184,12 @@ export default function ParticleBackground() {
           
           if (distance < particle.connectionRadius) {
             // Connection opacity based on distance
-            const opacity = (1 - distance / particle.connectionRadius) * 0.3;
+            // Higher connection opacity for light theme for better visibility
+            const opacity = (1 - distance / particle.connectionRadius) * (isDark ? 0.3 : 0.4);
             // Different connection color based on theme
-            const connectionColor = isDark ? '255, 255, 255' : '50, 50, 80';
+            const connectionColor = isDark ? '255, 255, 255' : '70, 90, 130';
             ctx.strokeStyle = `rgba(${connectionColor}, ${opacity})`;
-            ctx.lineWidth = 0.5;
+            ctx.lineWidth = isDark ? 0.5 : 0.7;
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
             ctx.lineTo(otherParticle.x, otherParticle.y);
@@ -225,7 +227,7 @@ export default function ParticleBackground() {
       <div className={`absolute inset-0 bg-gradient-radial pointer-events-none ${
         isDark 
           ? 'from-transparent via-deep-space/30 to-deep-space/80' 
-          : 'from-transparent via-gray-100/30 to-gray-200/80'
+          : 'from-transparent via-blue-50/30 to-blue-100/50'
       }`}></div>
       
       {/* Canvas for particles */}
