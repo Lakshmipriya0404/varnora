@@ -13,7 +13,15 @@ import {
   Heart,
   Clock,
   Compass,
-  Database
+  Database,
+  Twitter,
+  Github,
+  Linkedin,
+  Instagram,
+  Link,
+  FileText,
+  Palette,
+  Video
 } from 'lucide-react';
 
 // Enhanced team data with bios and social links
@@ -255,18 +263,36 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], inde
             
             {/* Social links */}
             <div className="flex justify-center space-x-3">
-              {Object.keys(member.links).map((platform, idx) => (
-                <a 
-                  key={idx}
-                  href="#" 
-                  className={`w-8 h-8 rounded-full ${
-                    isDark ? 'bg-white/5' : 'bg-gray-100'
-                  } flex items-center justify-center hover:bg-neon-cyan/20 transition-colors`}
-                  aria-label={`${member.name}'s ${platform}`}
-                >
-                  <span className={`text-xs ${isDark ? 'text-white' : 'text-gray-700'}`}>{platform.charAt(0).toUpperCase()}</span>
-                </a>
-              ))}
+              {Object.entries(member.links).map(([platform, username], idx) => {
+                const Icon = (() => {
+                  switch (platform) {
+                    case 'twitter': return Twitter;
+                    case 'github': return Github;
+                    case 'linkedin': return Linkedin;
+                    case 'dribbble': return Shapes;
+                    case 'instagram': return Instagram;
+                    case 'behance': return Globe;
+                    case 'codepen': return Code;
+                    case 'medium': return FileText;
+                    case 'artstation': return Palette;
+                    case 'vimeo': return Video;
+                    default: return Link;
+                  }
+                })();
+                
+                return (
+                  <a 
+                    key={idx}
+                    href="#" 
+                    className={`w-8 h-8 rounded-full ${
+                      isDark ? 'bg-white/5' : 'bg-gray-100'
+                    } flex items-center justify-center hover:bg-neon-cyan/20 transition-colors group`}
+                    aria-label={`${member.name}'s ${platform}`}
+                  >
+                    <Icon className={`w-4 h-4 ${isDark ? 'text-white' : 'text-gray-700'} group-hover:text-neon-cyan transition-colors`} />
+                  </a>
+                );
+              })}
             </div>
           </div>
         </div>
