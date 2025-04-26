@@ -1,8 +1,6 @@
-import { forwardRef, useState, useEffect, Suspense } from 'react';
+import { forwardRef, useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useTheme } from './ThemeProvider';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Stars } from '@react-three/drei';
 import { 
   Phone, 
   Mail, 
@@ -285,38 +283,27 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true, margin: "-100px" }}
             >
-              {/* Interactive Globe */}
+              {/* Map placeholder */}
               <div className={`w-full h-full rounded ${
                 isDark ? 'bg-midnight/70' : 'bg-gray-200/70'
-              } overflow-hidden`}>
-                <Canvas camera={{ position: [0, 0, 2] }}>
-                  <ambientLight intensity={0.5} />
-                  <pointLight position={[10, 10, 10]} />
-                  <Suspense fallback={null}>
-                    <mesh rotation={[0, 0, 0]}>
-                      <sphereGeometry args={[1, 32, 32]} />
-                      <meshStandardMaterial 
-                        color={isDark ? "#1a1a2e" : "#e5e5e5"}
-                        metalness={0.7}
-                        roughness={0.3}
-                      />
-                      <OrbitControls 
-                        enableZoom={false}
-                        autoRotate
-                        autoRotateSpeed={0.5}
-                      />
-                    </mesh>
-                    <Stars 
-                      radius={100} 
-                      depth={50} 
-                      count={5000} 
-                      factor={4} 
-                      saturation={0} 
-                      fade 
-                      speed={1}
+              } flex items-center justify-center`}>
+                <div className="text-center">
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className="h-12 w-12 mx-auto text-neon-cyan/50" 
+                    fill="none" 
+                    viewBox="0 0 24 24" 
+                    stroke="currentColor"
+                  >
+                    <path 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round" 
+                      strokeWidth={2} 
+                      d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" 
                     />
-                  </Suspense>
-                </Canvas>
+                  </svg>
+                  <p className={`mt-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Interactive Map</p>
+                </div>
               </div>
             </motion.div>
           </div>
