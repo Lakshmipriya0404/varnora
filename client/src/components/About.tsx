@@ -1,185 +1,623 @@
-import { forwardRef } from 'react';
-import { motion } from 'framer-motion';
+import { forwardRef, useRef } from 'react';
+import { motion, useScroll, useTransform, useInView, useMotionTemplate } from 'framer-motion';
+import { useTheme } from './ThemeProvider';
 import { 
   Lightbulb, 
   Zap, 
-  Users 
+  Users, 
+  Code,
+  Globe,
+  Shapes,
+  Rocket,
+  Sparkles,
+  Heart,
+  Clock,
+  Compass
 } from 'lucide-react';
 
+// Enhanced team data with bios and social links
 const teamMembers = [
   {
     name: "Sarah Johnson",
     role: "Founder & Creative Director",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+    bio: "With over 15 years of experience in digital design, Sarah leads Glacium's creative vision and strategic direction.",
+    links: {
+      twitter: "sarahjohnson",
+      linkedin: "sarahjohnson",
+      dribbble: "sarahjohnson"
+    }
   },
   {
     name: "David Chen",
     role: "Lead Developer",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+    bio: "David is a full-stack engineer with expertise in React, Node.js, and cloud architecture.",
+    links: {
+      github: "davidchen",
+      linkedin: "davidchen",
+      twitter: "davidchen"
+    }
   },
   {
     name: "Mia Rodriguez",
     role: "UX Designer",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+    bio: "Mia specializes in user-centered design, creating intuitive interfaces that bridge aesthetics and functionality.",
+    links: {
+      dribbble: "miarodriguez",
+      behance: "miarodriguez",
+      linkedin: "miarodriguez"
+    }
   },
   {
     name: "Alex Thompson",
     role: "Frontend Specialist",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80"
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+    bio: "Alex crafts engaging user interfaces with a focus on performance, animation, and responsive design.",
+    links: {
+      github: "alexthompson",
+      codepen: "alexthompson",
+      linkedin: "alexthompson"
+    }
+  },
+  {
+    name: "Olivia Kim",
+    role: "Motion Designer",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+    bio: "Olivia creates fluid animations and micro-interactions that bring digital interfaces to life.",
+    links: {
+      dribbble: "oliviakim",
+      vimeo: "oliviakim",
+      instagram: "oliviakim"
+    }
+  },
+  {
+    name: "Marcus Williams",
+    role: "Backend Architect",
+    image: "https://images.unsplash.com/photo-1504257432389-52343af06ae3?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+    bio: "Marcus designs robust, scalable backend systems and APIs that power our most complex applications.",
+    links: {
+      github: "marcuswilliams",
+      linkedin: "marcuswilliams",
+      medium: "marcuswilliams"
+    }
+  },
+  {
+    name: "Sophia Patel",
+    role: "Project Manager",
+    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+    bio: "Sophia ensures our projects run smoothly, keeping teams aligned and delivering exceptional results on time.",
+    links: {
+      linkedin: "sophiapatel",
+      twitter: "sophiapatel"
+    }
+  },
+  {
+    name: "James Wilson",
+    role: "3D Artist",
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=80",
+    bio: "James creates immersive 3D elements and visualizations that enhance our digital experiences.",
+    links: {
+      artstation: "jameswilson",
+      instagram: "jameswilson",
+      linkedin: "jameswilson"
+    }
   }
 ];
 
-const About = forwardRef<HTMLElement>((props, ref) => {
+// Company timeline
+const companyTimeline = [
+  {
+    year: "2018",
+    title: "Founding",
+    description: "Glacium was established with a vision to blend cutting-edge technology with exceptional design.",
+    icon: <Rocket />
+  },
+  {
+    year: "2019",
+    title: "First Major Project",
+    description: "Completed our first enterprise-level application, establishing our reputation for quality.",
+    icon: <Shapes />
+  },
+  {
+    year: "2020",
+    title: "Remote Transformation",
+    description: "Pivoted to a fully distributed team while doubling our client portfolio.",
+    icon: <Globe />
+  },
+  {
+    year: "2021",
+    title: "Expansion",
+    description: "Grew our team to 15 members and expanded our service offerings to include 3D and motion design.",
+    icon: <Users />
+  },
+  {
+    year: "2022",
+    title: "Award Recognition",
+    description: "Received multiple industry awards for our innovative approach to digital experiences.",
+    icon: <Sparkles />
+  },
+  {
+    year: "2023",
+    title: "Global Reach",
+    description: "Expanded our client base internationally, working with companies across five continents.",
+    icon: <Compass />
+  },
+  {
+    year: "2024",
+    title: "Innovation Lab",
+    description: "Launched our R&D division focused on exploring emerging technologies and creative techniques.",
+    icon: <Lightbulb />
+  },
+  {
+    year: "2025",
+    title: "Today",
+    description: "Continuing to push boundaries and create exceptional digital experiences for our clients.",
+    icon: <Heart />
+  }
+];
+
+// Company core values
+const coreValues = [
+  {
+    icon: <Lightbulb className="h-6 w-6 text-white" />,
+    title: "Innovation",
+    description: "Constantly exploring new technologies and approaches to craft unique digital experiences.",
+    color: "from-neon-cyan to-blue-500"
+  },
+  {
+    icon: <Zap className="h-6 w-6 text-white" />,
+    title: "Performance",
+    description: "Optimizing every aspect of our work for speed, accessibility, and conversion.",
+    color: "from-electric-purple to-fuchsia-500"
+  },
+  {
+    icon: <Users className="h-6 w-6 text-white" />,
+    title: "Collaboration",
+    description: "Working closely with clients throughout the process to ensure alignment and satisfaction.",
+    color: "from-teal-400 to-neon-cyan"
+  },
+  {
+    icon: <Code className="h-6 w-6 text-white" />,
+    title: "Craftsmanship",
+    description: "Paying meticulous attention to detail in every line of code and pixel of design.",
+    color: "from-pink-500 to-electric-purple"
+  },
+  {
+    icon: <Clock className="h-6 w-6 text-white" />,
+    title: "Timeliness",
+    description: "Delivering exceptional results on schedule, respecting our clients' timelines.",
+    color: "from-amber-500 to-red-500"
+  },
+  {
+    icon: <Globe className="h-6 w-6 text-white" />,
+    title: "Global Perspective",
+    description: "Drawing inspiration from diverse cultures and approaches to solve complex challenges.",
+    color: "from-blue-500 to-indigo-600"
+  }
+];
+
+// Animated team member card
+const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], index: number }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(cardRef, { once: true, margin: "-100px" });
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+
   return (
-    <section 
-      id="about" 
-      ref={ref}
-      className="py-20 md:py-32 relative overflow-hidden"
+    <motion.div 
+      ref={cardRef}
+      className="glass rounded-lg overflow-hidden group relative"
+      initial={{ opacity: 0, y: 30 }}
+      animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+      transition={{ duration: 0.5, delay: 0.1 * index }}
+      whileHover={{ y: -8, transition: { duration: 0.2 } }}
     >
-      <div className="absolute inset-0 bg-gradient-radial from-midnight/80 to-deep-space"></div>
+      {/* Animated border effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-neon-cyan via-electric-purple to-neon-cyan opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+        style={{ zIndex: -1 }}
+      ></div>
       
-      <div className="container mx-auto px-6 relative z-10">
-        <motion.div 
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true, margin: "-100px" }}
-        >
-          <span className="font-code text-neon-cyan">&lt;about&gt;</span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4">Our Story</h2>
-          <p className="text-gray-300 max-w-2xl mx-auto">
-            Meet the team behind Glacium and discover our approach to creating meaningful digital experiences.
-          </p>
-        </motion.div>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <div className="relative">
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-neon-cyan to-electric-purple rounded-lg blur opacity-50"></div>
-              <div className="relative aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
+      <div className="p-1 h-full">
+        <div className="bg-deep-space rounded-lg p-5 h-full relative overflow-hidden">
+          {/* Background pattern */}
+          <div className="absolute inset-0 cyber-dots opacity-10"></div>
+          
+          {/* Image with hover effect */}
+          <div className="relative mb-4 w-24 h-24 mx-auto overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-neon-cyan to-electric-purple rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300" 
+              style={{ padding: '2px' }}
+            >
+              <div className="absolute inset-0 rounded-full overflow-hidden">
                 <img 
-                  src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80" 
-                  alt="Glacium team working together" 
+                  src={member.image} 
+                  alt={member.name} 
                   className="w-full h-full object-cover"
                 />
               </div>
             </div>
-          </motion.div>
+            <div className="w-24 h-24 rounded-full overflow-hidden">
+              <img 
+                src={member.image} 
+                alt={member.name} 
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+            </div>
+          </div>
           
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            <h3 className="text-2xl font-bold mb-6 gradient-text inline-block">Innovation meets expertise</h3>
-            <p className="text-gray-300 mb-6">
-              Founded in 2018, Glacium brings together a diverse team of designers, developers, and digital strategists with a shared passion for creating extraordinary digital experiences.
-            </p>
-            <p className="text-gray-300 mb-8">
-              We believe in pushing the boundaries of what's possible on the web, combining cutting-edge technology with thoughtful design to create solutions that not only look stunning but also perform exceptionally.
-            </p>
+          {/* Content */}
+          <div className="text-center">
+            <h4 className="font-bold text-lg">{member.name}</h4>
+            <p className="text-sm text-neon-cyan mb-3">{member.role}</p>
+            <p className="text-sm text-gray-400 mb-4 line-clamp-3">{member.bio}</p>
             
-            <div className="space-y-4">
+            {/* Social links */}
+            <div className="flex justify-center space-x-3">
+              {Object.keys(member.links).map((platform, idx) => (
+                <a 
+                  key={idx}
+                  href="#" 
+                  className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-neon-cyan/20 transition-colors"
+                  aria-label={`${member.name}'s ${platform}`}
+                >
+                  <span className="text-xs text-white">{platform.charAt(0).toUpperCase()}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+// Animated timeline component
+const Timeline = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ 
+    target: containerRef,
+    offset: ["start end", "end end"]
+  });
+  
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  
+  return (
+    <div className="relative py-12" ref={containerRef}>
+      {/* Timeline line */}
+      <div className="absolute left-[26px] md:left-1/2 md:transform md:-translate-x-px top-0 bottom-0 w-px bg-white/10"></div>
+      <motion.div 
+        className="absolute left-[26px] md:left-1/2 md:transform md:-translate-x-px top-0 w-px bg-neon-cyan"
+        style={{ height: lineHeight }}
+      ></motion.div>
+      
+      <div className="relative">
+        {companyTimeline.map((item, index) => (
+          <div key={index} className={`mb-12 flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+            <motion.div 
+              className={`relative z-10 md:w-1/2 ${
+                index % 2 === 0 ? 'md:pr-12 text-right' : 'md:pl-12'
+              }`}
+              initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+              viewport={{ once: true }}
+            >
+              <div className={`inline-block ${index % 2 === 0 ? 'md:float-right' : ''}`}>
+                <span className="text-neon-cyan font-code font-bold block">{item.year}</span>
+                <h4 className="text-xl font-bold mt-1 mb-2 gradient-text">{item.title}</h4>
+                <p className="text-gray-300 max-w-md">{item.description}</p>
+              </div>
+            </motion.div>
+            
+            <div className="absolute left-0 md:left-1/2 md:transform md:-translate-x-1/2 flex items-center justify-center">
               <motion.div 
-                className="glass p-4 rounded-lg"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.3 }}
-                viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ x: 5 }}
+                className="w-14 h-14 rounded-full bg-deep-space border-2 border-neon-cyan flex items-center justify-center"
+                initial={{ scale: 0, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+                viewport={{ once: true }}
               >
-                <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-neon-cyan to-electric-purple flex items-center justify-center mr-4">
-                    <Lightbulb className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold">Innovation</h4>
-                    <p className="text-sm text-gray-300">Constantly exploring new technologies and approaches</p>
-                  </div>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                className="glass p-4 rounded-lg"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.4 }}
-                viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ x: 5 }}
-              >
-                <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-electric-purple to-neon-cyan flex items-center justify-center mr-4">
-                    <Zap className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold">Performance</h4>
-                    <p className="text-sm text-gray-300">Optimized for speed, accessibility, and conversion</p>
-                  </div>
-                </div>
-              </motion.div>
-              
-              <motion.div 
-                className="glass p-4 rounded-lg"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.5 }}
-                viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ x: 5 }}
-              >
-                <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-neon-cyan to-electric-purple flex items-center justify-center mr-4">
-                    <Users className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <h4 className="font-bold">Collaboration</h4>
-                    <p className="text-sm text-gray-300">Working closely with clients throughout the process</p>
-                  </div>
-                </div>
+                {item.icon}
               </motion.div>
             </div>
-          </motion.div>
+            
+            <div className="md:w-1/2"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
+
+// Core value card
+const CoreValueCard = ({ value, index }: { value: typeof coreValues[0], index: number }) => {
+  return (
+    <motion.div 
+      className="glass rounded-lg overflow-hidden relative group cyberpunk-slash"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3, delay: index * 0.1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      whileHover={{ y: -5, scale: 1.02 }}
+    >
+      <div className="p-6">
+        <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${value.color} flex items-center justify-center mb-4`}>
+          {value.icon}
+        </div>
+        <h4 className="text-xl font-bold mb-2">{value.title}</h4>
+        <p className="text-gray-300">{value.description}</p>
+      </div>
+    </motion.div>
+  );
+};
+
+// Main About component with parallax effects
+const About = forwardRef<HTMLElement>((props, ref) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  
+  // References for parallax sections
+  const heroRef = useRef<HTMLDivElement>(null);
+  const valuesRef = useRef<HTMLDivElement>(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const teamRef = useRef<HTMLDivElement>(null);
+  
+  // Parallax effects for hero section
+  const { scrollYProgress: heroScroll } = useScroll({
+    target: heroRef,
+    offset: ["start end", "end start"]
+  });
+  
+  const heroY = useTransform(heroScroll, [0, 1], [0, -100]);
+  const heroOpacity = useTransform(heroScroll, [0, 0.5, 1], [1, 1, 0]);
+  
+  // Rotating 3D effect for company logo/graphic
+  const rotateX = useTransform(heroScroll, [0, 1], [0, 10]);
+  const rotateY = useTransform(heroScroll, [0, 1], [0, 15]);
+  const heroScale = useTransform(heroScroll, [0, 0.5, 1], [1, 1.1, 1]);
+  
+  const logoTransform = useMotionTemplate`perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(${heroScale})`;
+  
+  return (
+    <section 
+      id="about" 
+      ref={ref}
+      className="relative overflow-hidden bg-deep-space"
+    >
+      {/* Hero section with parallax effect */}
+      <div 
+        ref={heroRef}
+        className="relative h-[80vh] flex items-center justify-center overflow-hidden"
+      >
+        {/* Parallax background elements */}
+        <motion.div 
+          className="absolute inset-0 bg-gradient-radial from-midnight/40 to-deep-space"
+          style={{ y: heroY, opacity: heroOpacity }}
+        ></motion.div>
+        
+        {/* Particle dust effect in background */}
+        <div className="absolute inset-0 cyber-dots opacity-20"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* 3D rotating company visual */}
+            <motion.div
+              className="relative mx-auto lg:mx-0 max-w-md"
+              style={{ transform: logoTransform }}
+            >
+              <div className="relative aspect-square">
+                {/* Glowing orb background */}
+                <div className="absolute inset-0 rounded-full bg-electric-purple/10 filter blur-[80px]"></div>
+                
+                {/* Company visual/logo */}
+                <div className="relative z-10 glassmorphism rounded-xl overflow-hidden">
+                  <div className="relative aspect-w-1 aspect-h-1 rounded-xl overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/20 to-electric-purple/20 backdrop-blur-sm"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-neon-cyan to-electric-purple p-1 mb-6">
+                          <div className="w-full h-full rounded-full bg-deep-space flex items-center justify-center text-6xl font-bold text-white">G</div>
+                        </div>
+                        <h2 className="text-4xl font-bold gradient-text">Glacium</h2>
+                        <p className="text-white/70 mt-2">Est. 2018</p>
+                      </div>
+                    </div>
+                    
+                    {/* Decorative elements */}
+                    <div className="absolute top-8 right-8 w-16 h-16 border border-white/20 rounded-full"></div>
+                    <div className="absolute bottom-12 left-10 w-8 h-8 border border-neon-cyan/30 rounded-full"></div>
+                    <div className="absolute top-1/2 left-10 w-12 h-12 border border-electric-purple/30 rounded-lg"></div>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+            
+            {/* Hero content */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              <div className="relative">
+                <span className="font-code text-neon-cyan mb-2 block">&lt;about&gt;</span>
+                <h2 className="text-5xl font-bold mb-6">Our Story</h2>
+                <div className="h-1 w-20 bg-gradient-to-r from-neon-cyan to-electric-purple mb-6"></div>
+                
+                <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+                  Founded in 2018, Glacium brings together a diverse team of designers, developers, and digital strategists with a shared passion for creating extraordinary digital experiences.
+                </p>
+                
+                <p className="text-gray-300 mb-8 leading-relaxed">
+                  We believe in pushing the boundaries of what's possible on the web, combining cutting-edge technology with thoughtful design to create solutions that not only look stunning but also perform exceptionally.
+                </p>
+                
+                <motion.a 
+                  href="#team"
+                  className="inline-flex items-center px-6 py-3 rounded-md glass hover:bg-white/10 transition-colors"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('team')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                  whileHover={{ x: 5 }}
+                >
+                  <span>Meet our team</span>
+                  <svg className="ml-2 w-5 h-5" viewBox="0 0 20 20" fill="none">
+                    <path d="M4 10h12M12 4l6 6-6 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                </motion.a>
+              </div>
+            </motion.div>
+          </div>
         </div>
         
-        <div className="mt-20">
-          <motion.h3 
-            className="text-2xl font-bold mb-10 text-center"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true, margin: "-100px" }}
-          >
-            Our Team
-          </motion.h3>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {teamMembers.map((member, index) => (
+        {/* Scroll indicator */}
+        <motion.div 
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ 
+            duration: 1.5, 
+            repeat: Infinity, 
+            repeatType: "reverse" 
+          }}
+        >
+          <div className="flex flex-col items-center">
+            <p className="text-neon-cyan text-xs mb-2 font-code">SCROLL</p>
+            <div className="w-6 h-10 border-2 border-neon-cyan rounded-full flex justify-center pt-2">
               <motion.div 
-                key={index}
-                className="glass p-4 rounded-lg text-center"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 * index }}
-                viewport={{ once: true, margin: "-100px" }}
-                whileHover={{ y: -5, transition: { duration: 0.2 } }}
-              >
-                <div className="w-24 h-24 mx-auto rounded-full overflow-hidden mb-4">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <h4 className="font-bold">{member.name}</h4>
-                <p className="text-sm text-neon-cyan">{member.role}</p>
-              </motion.div>
+                className="w-1.5 h-1.5 rounded-full bg-neon-cyan"
+                animate={{ 
+                  y: [0, 10, 0],
+                  opacity: [0.5, 1, 0.5]
+                }}
+                transition={{ 
+                  duration: 1.5, 
+                  repeat: Infinity 
+                }}
+              />
+            </div>
+          </div>
+        </motion.div>
+      </div>
+      
+      {/* Core values section */}
+      <div 
+        ref={valuesRef}
+        className="py-20 relative"
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-deep-space via-midnight/50 to-deep-space"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <span className="font-code text-neon-cyan">&lt;values&gt;</span>
+            <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4">Our Core Values</h2>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              These principles guide everything we do, from client interactions to the smallest details in our work.
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {coreValues.map((value, index) => (
+              <CoreValueCard key={index} value={value} index={index} />
             ))}
           </div>
+        </div>
+      </div>
+      
+      {/* Company timeline */}
+      <div 
+        id="timeline"
+        ref={timelineRef}
+        className="py-20 relative bg-deep-space"
+      >
+        <div className="absolute inset-0 futuristic-grid opacity-30"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <span className="font-code text-neon-cyan">&lt;timeline&gt;</span>
+            <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4">Our Journey</h2>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              From humble beginnings to where we are today, see how we've evolved over the years.
+            </p>
+          </motion.div>
+          
+          <Timeline />
+        </div>
+        
+        {/* Decorative elements */}
+        <div className="absolute top-1/4 left-0 w-96 h-96 rounded-full bg-electric-purple/5 filter blur-[120px] pointer-events-none"></div>
+        <div className="absolute bottom-1/4 right-0 w-96 h-96 rounded-full bg-neon-cyan/5 filter blur-[120px] pointer-events-none"></div>
+      </div>
+      
+      {/* Team section */}
+      <div 
+        id="team"
+        ref={teamRef}
+        className="py-20 relative bg-deep-space"
+      >
+        <div className="absolute inset-0 bg-gradient-to-b from-deep-space via-midnight/30 to-deep-space"></div>
+        
+        <div className="container mx-auto px-6 relative z-10">
+          <motion.div 
+            className="text-center mb-16"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <span className="font-code text-neon-cyan">&lt;team&gt;</span>
+            <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4">Meet Our Team</h2>
+            <p className="text-gray-300 max-w-2xl mx-auto">
+              The talented individuals who bring our vision to life and push the boundaries of digital creation.
+            </p>
+          </motion.div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {teamMembers.map((member, index) => (
+              <TeamMemberCard key={index} member={member} index={index} />
+            ))}
+          </div>
+          
+          {/* Join our team CTA */}
+          <motion.div 
+            className="mt-16 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+            viewport={{ once: true }}
+          >
+            <div className="glass p-8 rounded-lg max-w-2xl mx-auto cyber-scanline">
+              <h3 className="text-2xl font-bold mb-4">Join Our Team</h3>
+              <p className="text-gray-300 mb-6">
+                We're always looking for talented individuals to join our creative collective. If you're passionate about digital innovation, we'd love to hear from you.
+              </p>
+              <a 
+                href="#contact" 
+                className="inline-block px-8 py-3 rounded-md animate-gradient text-white font-semibold hover:opacity-90 transition-opacity relative group overflow-hidden"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                }}
+              >
+                <div className="absolute inset-0 bg-white/20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+                <span className="relative">View Open Positions</span>
+              </a>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>
