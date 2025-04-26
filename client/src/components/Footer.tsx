@@ -45,8 +45,8 @@ export default function Footer() {
             <Link href="/" className="text-2xl font-bold gradient-text mb-4 block">
               Glacium
             </Link>
-            <p className="text-gray-400 mb-6">Transforming ideas into exceptional digital experiences.</p>
-            <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Glacium Creative Agency. All rights reserved.</p>
+            <p className={`mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Transforming ideas into exceptional digital experiences.</p>
+            <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>© {new Date().getFullYear()} Glacium Creative Agency. All rights reserved.</p>
           </motion.div>
           
           <motion.div
@@ -55,13 +55,13 @@ export default function Footer() {
             transition={{ duration: 0.5, delay: 0.1 }}
             viewport={{ once: true }}
           >
-            <h4 className="text-lg font-bold mb-4">Services</h4>
+            <h4 className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-800'}`}>Services</h4>
             <ul className="space-y-2">
               {services.map((item, index) => (
                 <li key={index}>
                   <a 
                     href={item.href} 
-                    className="text-gray-400 hover:text-neon-cyan transition-colors"
+                    className={`hover:text-neon-cyan transition-colors ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
                     onClick={(e) => {
                       e.preventDefault();
                       scrollToSection(item.href.replace('#', ''));
@@ -80,13 +80,13 @@ export default function Footer() {
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
           >
-            <h4 className="text-lg font-bold mb-4">Company</h4>
+            <h4 className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-800'}`}>Company</h4>
             <ul className="space-y-2">
               {company.map((item, index) => (
                 <li key={index}>
                   <a 
                     href={item.href} 
-                    className="text-gray-400 hover:text-neon-cyan transition-colors"
+                    className={`hover:text-neon-cyan transition-colors ${isDark ? 'text-gray-400' : 'text-gray-600'}`}
                     onClick={(e) => {
                       e.preventDefault();
                       if (item.href.startsWith('#')) {
@@ -107,8 +107,8 @@ export default function Footer() {
             transition={{ duration: 0.5, delay: 0.3 }}
             viewport={{ once: true }}
           >
-            <h4 className="text-lg font-bold mb-4">Newsletter</h4>
-            <p className="text-gray-400 mb-4">Subscribe to our newsletter for the latest updates.</p>
+            <h4 className={`text-lg font-bold mb-4 ${isDark ? 'text-white' : 'text-gray-800'}`}>Newsletter</h4>
+            <p className={`mb-4 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Subscribe to our newsletter for the latest updates.</p>
             <form 
               className="flex"
               onSubmit={async (e) => {
@@ -141,7 +141,11 @@ export default function Footer() {
               <input 
                 type="email" 
                 placeholder="Your email" 
-                className="px-4 py-2 rounded-l-md bg-midnight/50 border border-white/10 focus:outline-none w-full"
+                className={`px-4 py-2 rounded-l-md w-full focus:outline-none ${
+                  isDark 
+                    ? 'bg-midnight/50 border border-white/10 text-white placeholder-gray-500'
+                    : 'bg-white border border-gray-300 text-gray-800 placeholder-gray-400'
+                }`}
                 required
               />
               <button 
