@@ -72,10 +72,10 @@
   --ring: 240 5% 64.9%;
 
   /* Custom Glacium theme colors - Light Mode */
-  --deep-space: 220 33% 95%;
-  --midnight: 220 26% 85%;
-  --neon-cyan: 180 90% 40%;
-  --electric-purple: 276 90% 40%;
+  --deep-space: 210 40% 96%;
+  --midnight: 215 35% 85%;
+  --neon-cyan: 185 90% 40%;
+  --electric-purple: 276 85% 45%;
   
   /* Sidebar colors for light mode */
   --sidebar-background: var(--deep-space);
@@ -133,7 +133,7 @@
   }
   
   .light body {
-    @apply bg-gray-50;
+    @apply bg-gradient-to-b from-blue-50 via-gray-50 to-white;
   }
 
   code, pre, .font-code {
@@ -153,7 +153,7 @@
   
   /* Glass effect for light theme */
   .light .glass {
-    @apply bg-white/80 border border-slate-200/60 shadow-sm backdrop-blur-md bg-gradient-to-br from-white/90 to-white/60;
+    @apply bg-white/80 border border-slate-200/60 shadow-[0_4px_20px_-2px_rgba(0,180,216,0.1)] backdrop-blur-md bg-gradient-to-br from-white/90 to-blue-50/30;
   }
   
   .glassmorphism {
@@ -167,7 +167,7 @@
   
   /* Glassmorphism effect for light theme */
   .light .glassmorphism {
-    @apply bg-white/80 border border-slate-200/60 shadow-md bg-gradient-to-br from-blue-50/30 to-white/70;
+    @apply bg-white/80 border border-slate-200/60 shadow-[0_8px_32px_-4px_rgba(0,180,216,0.15)] bg-gradient-to-br from-blue-50/40 to-white/90;
   }
   
   .gradient-text {
@@ -255,8 +255,12 @@
   width: 100%;
 }
 
-.circuit-pattern {
+.dark .circuit-pattern {
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M36 34c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' stroke='rgba(255, 255, 255, 0.1)' stroke-width='2'/%3E%3Cpath d='M13 18a3 3 0 100-6 3 3 0 000 6' stroke='rgba(0, 255, 255, 0.2)' stroke-width='1'/%3E%3Cpath d='M52 42a2 2 0 100-4 2 2 0 000 4' stroke='rgba(157, 0, 255, 0.2)' stroke-width='1'/%3E%3Cpath d='M10 28h8M28 10v8' stroke='rgba(255, 255, 255, 0.1)' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.light .circuit-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M36 34c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' stroke='rgba(0, 0, 0, 0.06)' stroke-width='2'/%3E%3Cpath d='M13 18a3 3 0 100-6 3 3 0 000 6' stroke='rgba(0, 180, 216, 0.2)' stroke-width='1'/%3E%3Cpath d='M52 42a2 2 0 100-4 2 2 0 000 4' stroke='rgba(138, 43, 226, 0.2)' stroke-width='1'/%3E%3Cpath d='M10 28h8M28 10v8' stroke='rgba(0, 0, 0, 0.06)' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* Futuristic background effects */

@@ -288,16 +288,16 @@ const ProjectDetail = () => {
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
                   {project.results.map((result, idx) => (
-                    <div key={idx} className="glass rounded-lg p-6 text-center">
+                    <div key={idx} className={`glass rounded-lg p-6 text-center ${isDark ? '' : 'bg-blue-50/30'}`}>
                       <div className="w-16 h-16 rounded-full bg-gradient-to-br from-neon-cyan to-electric-purple mx-auto mb-4 flex items-center justify-center">
-                        <span className="text-2xl font-bold">{idx + 1}</span>
+                        <span className="text-2xl font-bold text-white">{idx + 1}</span>
                       </div>
-                      <p className="text-lg font-semibold">{result}</p>
+                      <p className={`text-lg font-semibold ${isDark ? '' : 'text-gray-700'}`}>{result}</p>
                     </div>
                   ))}
                 </div>
                 
-                <div className="glass rounded-lg p-6 mb-12">
+                <div className={`glass rounded-lg p-6 mb-12 ${isDark ? '' : 'bg-gradient-to-br from-blue-50/20 to-white/80'}`}>
                   <h3 className="text-xl font-bold mb-4">Impact Analysis</h3>
                   <p className={`${isDark ? 'text-white/70' : 'text-gray-600'} mb-4`}>
                     The solution significantly improved the client's operational efficiency and customer satisfaction metrics. Key improvements include:
@@ -305,27 +305,27 @@ const ProjectDetail = () => {
                   <ul className="space-y-2">
                     <li className="flex items-start">
                       <ChevronRight className="w-5 h-5 text-neon-cyan flex-shrink-0 mt-0.5 mr-2" />
-                      <span>Enhanced user engagement and satisfaction</span>
+                      <span className={isDark ? '' : 'text-gray-700'}>Enhanced user engagement and satisfaction</span>
                     </li>
                     <li className="flex items-start">
                       <ChevronRight className="w-5 h-5 text-neon-cyan flex-shrink-0 mt-0.5 mr-2" />
-                      <span>Streamlined internal processes and workflows</span>
+                      <span className={isDark ? '' : 'text-gray-700'}>Streamlined internal processes and workflows</span>
                     </li>
                     <li className="flex items-start">
                       <ChevronRight className="w-5 h-5 text-neon-cyan flex-shrink-0 mt-0.5 mr-2" />
-                      <span>Improved data-driven decision making</span>
+                      <span className={isDark ? '' : 'text-gray-700'}>Improved data-driven decision making</span>
                     </li>
                     <li className="flex items-start">
                       <ChevronRight className="w-5 h-5 text-neon-cyan flex-shrink-0 mt-0.5 mr-2" />
-                      <span>Increased revenue and market share</span>
+                      <span className={isDark ? '' : 'text-gray-700'}>Increased revenue and market share</span>
                     </li>
                   </ul>
                 </div>
                 
                 <div>
                   <h3 className="text-xl font-bold mb-4">Client Testimonial</h3>
-                  <div className="glass rounded-lg p-8 border-l-4 border-electric-purple">
-                    <blockquote className="text-lg italic mb-4">"{project.testimonial.text}"</blockquote>
+                  <div className={`glass rounded-lg p-8 border-l-4 border-electric-purple ${isDark ? '' : 'bg-blue-50/20'}`}>
+                    <blockquote className={`text-lg italic mb-4 ${isDark ? '' : 'text-gray-700'}`}>"{project.testimonial.text}"</blockquote>
                     <footer className={`text-right ${isDark ? 'text-white/70' : 'text-gray-600'}`}>— {project.testimonial.author}</footer>
                   </div>
                 </div>
