@@ -1,7 +1,10 @@
 import { Link } from 'wouter';
 import { motion } from 'framer-motion';
+import { useTheme } from './ThemeProvider';
 
 export default function Footer() {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -26,7 +29,11 @@ export default function Footer() {
   ];
   
   return (
-    <footer className="bg-deep-space py-12 border-t border-white/10">
+    <footer className={`py-12 border-t ${
+      isDark 
+        ? 'bg-deep-space border-white/10' 
+        : 'bg-gray-100 border-gray-200'
+    }`}>
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <motion.div
