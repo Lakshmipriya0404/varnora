@@ -511,93 +511,50 @@ const About = forwardRef<HTMLElement>((props, ref) => {
                 {/* Animated circuit lines */}
                 <div className="absolute inset-0 overflow-hidden">
                   <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 300 300">
-                    <defs>
-                      <linearGradient id="circuitGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                        <stop offset="0%" stopColor="hsla(var(--neon-cyan), 0.8)" />
-                        <stop offset="100%" stopColor="hsla(var(--electric-purple), 0.8)" />
-                      </linearGradient>
-                      <filter id="glow">
-                        <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
-                        <feMerge>
-                          <feMergeNode in="coloredBlur"/>
-                          <feMergeNode in="SourceGraphic"/>
-                        </feMerge>
-                      </filter>
-                    </defs>
                     <motion.path 
-                      d="M30,50 C50,50 70,20 100,20 S150,80 180,80 S230,20 270,20" 
-                      stroke="url(#circuitGrad1)"
-                      strokeWidth="2"
-                      filter="url(#glow)"
+                      d="M50,50 L100,50 L150,100 L200,100 L250,50" 
+                      stroke="hsla(var(--neon-cyan), 0.3)" 
+                      strokeWidth="1" 
                       fill="none"
                       initial={{ pathLength: 0, opacity: 0 }}
-                      animate={{ 
-                        pathLength: [0, 1],
-                        opacity: [0, 1],
-                        strokeDasharray: ["0 1", "1 0"]
-                      }}
-                      transition={{ 
-                        duration: 3,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        ease: "easeInOut"
-                      }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 2, delay: 0.5 }}
                     />
                     <motion.path 
-                      d="M30,150 C60,150 90,100 120,100 S180,200 210,200 S270,150 270,150" 
-                      stroke="hsla(var(--electric-purple), 0.6)"
-                      strokeWidth="2"
-                      filter="url(#glow)"
+                      d="M50,150 L100,150 L150,100 L200,100 L250,150" 
+                      stroke="hsla(var(--electric-purple), 0.3)" 
+                      strokeWidth="1" 
                       fill="none"
                       initial={{ pathLength: 0, opacity: 0 }}
-                      animate={{ 
-                        pathLength: [0, 1],
-                        opacity: [0, 0.8],
-                        strokeDasharray: ["0 1", "1 0"]
-                      }}
-                      transition={{ 
-                        duration: 4,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        ease: "easeInOut",
-                        delay: 0.5
-                      }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 2, delay: 0.8 }}
                     />
                     <motion.path 
-                      d="M30,250 C70,250 90,200 130,200 S190,280 230,280 S270,250 270,250" 
-                      stroke="hsla(var(--neon-cyan), 0.6)"
-                      strokeWidth="2"
-                      filter="url(#glow)"
+                      d="M50,250 L100,250 L150,200 L200,200 L250,250" 
+                      stroke="hsla(var(--neon-cyan), 0.3)" 
+                      strokeWidth="1" 
                       fill="none"
                       initial={{ pathLength: 0, opacity: 0 }}
-                      animate={{ 
-                        pathLength: [0, 1],
-                        opacity: [0, 0.8],
-                        strokeDasharray: ["0 1", "1 0"]
-                      }}
-                      transition={{ 
-                        duration: 5,
-                        repeat: Infinity,
-                        repeatType: "reverse",
-                        ease: "easeInOut",
-                        delay: 1
-                      }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 2, delay: 1.1 }}
                     />
-                    <motion.circle 
-                      cx="150" 
-                      cy="150" 
-                      r="5"
-                      fill="hsla(var(--neon-cyan), 1)"
-                      filter="url(#glow)"
-                      animate={{
-                        scale: [1, 1.5, 1],
-                        opacity: [0.5, 1, 0.5]
-                      }}
-                      transition={{
-                        duration: 2,
-                        repeat: Infinity,
-                        ease: "easeInOut"
-                      }}
+                    <motion.path 
+                      d="M50,50 L50,100 L100,150 L100,200 L50,250" 
+                      stroke="hsla(var(--electric-purple), 0.3)" 
+                      strokeWidth="1" 
+                      fill="none"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 2, delay: 1.4 }}
+                    />
+                    <motion.path 
+                      d="M250,50 L250,100 L200,150 L200,200 L250,250" 
+                      stroke="hsla(var(--neon-cyan), 0.3)" 
+                      strokeWidth="1" 
+                      fill="none"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 2, delay: 1.7 }}
                     />
                   </svg>
                 </div>
