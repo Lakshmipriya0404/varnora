@@ -156,6 +156,20 @@
     @apply bg-white/70 border border-slate-200/50 shadow-sm;
   }
   
+  .glassmorphism {
+    @apply backdrop-blur-md rounded-xl;
+  }
+  
+  /* Glassmorphism effect for dark theme */
+  .dark .glassmorphism {
+    @apply bg-white/5 border border-white/10 shadow-lg;
+  }
+  
+  /* Glassmorphism effect for light theme */
+  .light .glassmorphism {
+    @apply bg-white/80 border border-slate-200/50 shadow-md;
+  }
+  
   .gradient-text {
     @apply bg-gradient-to-r from-neon-cyan to-electric-purple bg-clip-text text-transparent;
   }
