@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 :root {
-  /* Default theme */
+  /* Default dark theme */
   --background: 240 10% 3.9%;
   --foreground: 0 0% 98%;
   --muted: 240 3.7% 15.9%;
@@ -27,7 +27,7 @@
   --ring: 240 4.9% 83.9%;
   --radius: 0.5rem;
 
-  /* Custom Glacium theme colors */
+  /* Custom Glacium theme colors - Dark Mode */
   --deep-space: 240 43% 8%;
   --midnight: 240 26% 23%;
   --neon-cyan: 180 100% 50%;
@@ -49,6 +49,71 @@
   --sidebar-accent-foreground: 0 0% 100%;
   --sidebar-border: 240 13% 25%;
   --sidebar-ring: var(--neon-cyan);
+}
+
+/* Light theme */
+.light-theme {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 46.1%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --accent: 271 91% 65%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 5% 64.9%;
+
+  /* Custom Glacium theme colors - Light Mode */
+  --deep-space: 220 33% 95%;
+  --midnight: 220 26% 85%;
+  --neon-cyan: 180 90% 40%;
+  --electric-purple: 276 90% 40%;
+  
+  /* Sidebar colors for light mode */
+  --sidebar-background: var(--deep-space);
+  --sidebar-foreground: 240 10% 3.9%;
+  --sidebar-primary: var(--neon-cyan);
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: var(--electric-purple);
+  --sidebar-accent-foreground: 0 0% 100%;
+  --sidebar-border: 240 5.9% 90%;
+}
+
+/* Dark theme - explicitly declared for specificity */
+.dark-theme {
+  --background: 240 10% 3.9%;
+  --foreground: 0 0% 98%;
+  --muted: 240 3.7% 15.9%;
+  --muted-foreground: 240 5% 64.9%;
+  --popover: 240 10% 3.9%;
+  --popover-foreground: 0 0% 98%;
+  --card: 240 10% 3.9%;
+  --card-foreground: 0 0% 98%;
+  --border: 240 3.7% 15.9%;
+  --input: 240 3.7% 15.9%;
+  --primary: 191 100% 50%;
+  --primary-foreground: 211 100% 99%;
+  --secondary: 240 3.7% 15.9%;
+  --secondary-foreground: 0 0% 98%;
+  --accent: 271 100% 50%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 62.8% 30.6%;
+  --destructive-foreground: 0 0% 98%;
+  --ring: 240 4.9% 83.9%;
+
+  /* Custom Glacium theme colors - Dark Mode */
+  --deep-space: 240 43% 8%;
+  --midnight: 240 26% 23%;
+  --neon-cyan: 180 100% 50%;
+  --electric-purple: 276 100% 50%;
 }
 
 @layer base {

@@ -37,8 +37,8 @@ export default function Navbar() {
     >
       <nav className="glass mx-auto px-6 py-4 flex items-center justify-between">
         <div className="flex items-center">
-          <Link href="/">
-            <a className="text-2xl font-bold gradient-text">Glacium</a>
+          <Link href="/" className="text-2xl font-bold gradient-text">
+            Glacium
           </Link>
         </div>
         

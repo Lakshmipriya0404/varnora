@@ -35,8 +35,8 @@ export default function Footer() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <Link href="/">
-              <a className="text-2xl font-bold gradient-text mb-4 block">Glacium</a>
+            <Link href="/" className="text-2xl font-bold gradient-text mb-4 block">
+              Glacium
             </Link>
             <p className="text-gray-400 mb-6">Transforming ideas into exceptional digital experiences.</p>
             <p className="text-gray-500 text-sm">© {new Date().getFullYear()} Glacium Creative Agency. All rights reserved.</p>

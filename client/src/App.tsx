@@ -6,6 +6,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 import Home from "@/pages/Home";
 import { useEffect } from "react";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import ThemeToggle from "@/components/ThemeToggle";
 
 function Router() {
   // Scroll to top on route change
@@ -25,8 +27,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <Toaster />
-        <Router />
+        <ThemeProvider>
+          <Toaster />
+          <ThemeToggle />
+          <Router />
+        </ThemeProvider>
       </TooltipProvider>
     </QueryClientProvider>
   );
