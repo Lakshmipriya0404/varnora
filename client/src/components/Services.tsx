@@ -249,7 +249,7 @@ const Services = forwardRef<HTMLElement>((props, ref) => {
           </div>
           
           <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4 relative inline-block">
-            <span className="relative z-10">Our Expertise</span>
+            <span className={`relative z-10 ${isDark ? '' : 'text-gray-800'}`}>Our Expertise</span>
             <motion.div 
               className="absolute -inset-1 rounded-md bg-gradient-to-r from-neon-cyan/20 to-electric-purple/20 blur-md -z-0"
               initial={{ opacity: 0 }}
