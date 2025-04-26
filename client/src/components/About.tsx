@@ -221,7 +221,7 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], inde
       ></div>
       
       <div className="p-1 h-full">
-        <div className="bg-deep-space rounded-lg p-5 h-full relative overflow-hidden">
+        <div className={`${isDark ? 'bg-deep-space' : 'bg-white'} rounded-lg p-5 h-full relative overflow-hidden`}>
           {/* Background pattern */}
           <div className="absolute inset-0 cyber-dots opacity-10"></div>
           
@@ -251,7 +251,7 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], inde
           <div className="text-center">
             <h4 className="font-bold text-lg">{member.name}</h4>
             <p className="text-sm text-neon-cyan mb-3">{member.role}</p>
-            <p className="text-sm text-gray-400 mb-4 line-clamp-3">{member.bio}</p>
+            <p className={`text-sm ${isDark ? 'text-gray-400' : 'text-gray-500'} mb-4 line-clamp-3`}>{member.bio}</p>
             
             {/* Social links */}
             <div className="flex justify-center space-x-3">
@@ -259,10 +259,12 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], inde
                 <a 
                   key={idx}
                   href="#" 
-                  className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-neon-cyan/20 transition-colors"
+                  className={`w-8 h-8 rounded-full ${
+                    isDark ? 'bg-white/5' : 'bg-gray-100'
+                  } flex items-center justify-center hover:bg-neon-cyan/20 transition-colors`}
                   aria-label={`${member.name}'s ${platform}`}
                 >
-                  <span className="text-xs text-white">{platform.charAt(0).toUpperCase()}</span>
+                  <span className={`text-xs ${isDark ? 'text-white' : 'text-gray-700'}`}>{platform.charAt(0).toUpperCase()}</span>
                 </a>
               ))}
             </div>
