@@ -77,6 +77,10 @@
   --neon-cyan: 185 90% 40%;
   --electric-purple: 276 85% 45%;
   
+  /* Override text colors for light theme */
+  color-scheme: light;
+  color: hsl(222 47% 11%);
+  
   /* Sidebar colors for light mode */
   --sidebar-background: var(--deep-space);
   --sidebar-foreground: 240 10% 3.9%;
