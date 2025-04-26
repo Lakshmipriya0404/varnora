@@ -283,26 +283,22 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true, margin: "-100px" }}
             >
-              {/* Map placeholder */}
-              <div className={`w-full h-full rounded ${
+              {/* Futuristic visualization */}
+              <div className={`w-full h-full rounded overflow-hidden ${
                 isDark ? 'bg-midnight/70' : 'bg-gray-200/70'
-              } flex items-center justify-center`}>
-                <div className="text-center">
-                  <svg 
-                    xmlns="http://www.w3.org/2000/svg" 
-                    className="h-12 w-12 mx-auto text-neon-cyan/50" 
-                    fill="none" 
-                    viewBox="0 0 24 24" 
-                    stroke="currentColor"
-                  >
-                    <path 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round" 
-                      strokeWidth={2} 
-                      d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" 
-                    />
-                  </svg>
-                  <p className={`mt-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>Interactive Map</p>
+              }`}>
+                <div className="relative w-full h-full">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-32 h-32 rounded-full bg-gradient-to-r from-neon-cyan/20 to-electric-purple/20 animate-pulse"></div>
+                    <div className="absolute w-48 h-48 rounded-full border border-neon-cyan/30 animate-spin-slow"></div>
+                    <div className="absolute w-64 h-64 rounded-full border border-electric-purple/20 animate-reverse-spin"></div>
+                  </div>
+                  <div className="absolute inset-0 bg-grid-pattern opacity-30"></div>
+                  <div className="absolute bottom-4 left-4 right-4 text-center">
+                    <p className={`${isDark ? 'text-gray-400' : 'text-gray-500'} font-code`}>
+                      Digital Innovation Hub
+                    </p>
+                  </div>
                 </div>
               </div>
             </motion.div>

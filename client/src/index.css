@@ -29,6 +29,39 @@
 
   /* Custom Glacium theme colors - Dark Mode */
   --deep-space: 240 43% 8%;
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes reverse-spin {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+.animate-reverse-spin {
+  animation: reverse-spin 12s linear infinite;
+}
+
+.bg-grid-pattern {
+  background-image: linear-gradient(to right, rgba(var(--neon-cyan-rgb), 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(var(--neon-cyan-rgb), 0.1) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
   --midnight: 240 26% 23%;
   --neon-cyan: 180 100% 50%;
   --electric-purple: 276 100% 50%;
