@@ -401,33 +401,218 @@ const About = forwardRef<HTMLElement>((props, ref) => {
         
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* 3D rotating company visual */}
+            {/* Advanced 3D rotating company visual with futuristic elements */}
             <motion.div
               className="relative mx-auto lg:mx-0 max-w-md"
               style={{ transform: logoTransform }}
             >
               <div className="relative aspect-square">
-                {/* Glowing orb background */}
-                <div className="absolute inset-0 rounded-full bg-electric-purple/10 filter blur-[80px]"></div>
+                {/* Glowing orb background with animation */}
+                <motion.div 
+                  className="absolute inset-0 rounded-full bg-electric-purple/10 filter blur-[80px]"
+                  animate={{ 
+                    scale: [1, 1.2, 1],
+                    opacity: [0.5, 0.8, 0.5]
+                  }}
+                  transition={{
+                    duration: 8,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
+                ></motion.div>
                 
-                {/* Company visual/logo */}
-                <div className="relative z-10 glassmorphism rounded-xl overflow-hidden">
-                  <div className="relative aspect-w-1 aspect-h-1 rounded-xl overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/20 to-electric-purple/20 backdrop-blur-sm"></div>
+                {/* Secondary glow for depth */}
+                <motion.div 
+                  className="absolute -top-10 -left-10 w-[120%] h-[120%] rounded-full bg-neon-cyan/5 filter blur-[100px]"
+                  animate={{ 
+                    scale: [1, 1.1, 1],
+                    opacity: [0.3, 0.6, 0.3]
+                  }}
+                  transition={{
+                    duration: 10,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 1
+                  }}
+                ></motion.div>
+                
+                {/* Futuristic holographic cube frame */}
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="relative w-full h-full max-w-[350px] max-h-[350px]">
+                    <motion.div
+                      className="absolute inset-6 border-2 border-neon-cyan/30 rounded-xl"
+                      animate={{ 
+                        rotate: [0, 5, 0, -5, 0],
+                      }}
+                      transition={{
+                        duration: 10,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    ></motion.div>
+                    <motion.div
+                      className="absolute inset-12 border-2 border-electric-purple/20 rounded-xl"
+                      animate={{ 
+                        rotate: [0, -7, 0, 7, 0],
+                      }}
+                      transition={{
+                        duration: 15,
+                        repeat: Infinity,
+                        ease: "linear"
+                      }}
+                    ></motion.div>
+                  </div>
+                </div>
+                
+                {/* Animated circuit lines */}
+                <div className="absolute inset-0 overflow-hidden">
+                  <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 300 300">
+                    <motion.path 
+                      d="M50,50 L100,50 L150,100 L200,100 L250,50" 
+                      stroke="hsla(var(--neon-cyan), 0.3)" 
+                      strokeWidth="1" 
+                      fill="none"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 2, delay: 0.5 }}
+                    />
+                    <motion.path 
+                      d="M50,150 L100,150 L150,100 L200,100 L250,150" 
+                      stroke="hsla(var(--electric-purple), 0.3)" 
+                      strokeWidth="1" 
+                      fill="none"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 2, delay: 0.8 }}
+                    />
+                    <motion.path 
+                      d="M50,250 L100,250 L150,200 L200,200 L250,250" 
+                      stroke="hsla(var(--neon-cyan), 0.3)" 
+                      strokeWidth="1" 
+                      fill="none"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 2, delay: 1.1 }}
+                    />
+                    <motion.path 
+                      d="M50,50 L50,100 L100,150 L100,200 L50,250" 
+                      stroke="hsla(var(--electric-purple), 0.3)" 
+                      strokeWidth="1" 
+                      fill="none"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 2, delay: 1.4 }}
+                    />
+                    <motion.path 
+                      d="M250,50 L250,100 L200,150 L200,200 L250,250" 
+                      stroke="hsla(var(--neon-cyan), 0.3)" 
+                      strokeWidth="1" 
+                      fill="none"
+                      initial={{ pathLength: 0, opacity: 0 }}
+                      animate={{ pathLength: 1, opacity: 1 }}
+                      transition={{ duration: 2, delay: 1.7 }}
+                    />
+                  </svg>
+                </div>
+                
+                {/* Company visual/logo with holographic effect */}
+                <div className="relative z-10 glassmorphism rounded-xl overflow-hidden cyberpunk-slash">
+                  <div className="relative aspect-w-1 aspect-h-1 rounded-xl overflow-hidden cyber-dots">
+                    <div className="absolute inset-0 bg-gradient-to-br from-neon-cyan/10 to-electric-purple/10 backdrop-blur-sm"></div>
+                    
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">
-                        <div className="w-32 h-32 mx-auto rounded-full bg-gradient-to-br from-neon-cyan to-electric-purple p-1 mb-6">
-                          <div className="w-full h-full rounded-full bg-deep-space flex items-center justify-center text-6xl font-bold text-white">G</div>
+                        {/* Animated logo with cyberpunk effect */}
+                        <div className="relative w-36 h-36 mx-auto mb-6">
+                          <div className="absolute inset-0 rounded-full bg-gradient-to-br from-neon-cyan to-electric-purple p-[1px] animate-pulse">
+                            <div className="w-full h-full rounded-full bg-deep-space flex items-center justify-center">
+                              {/* Animated letter G */}
+                              <div className="relative">
+                                {/* Glow effect */}
+                                <div className="absolute inset-0 text-6xl font-bold text-neon-cyan blur-[8px] opacity-50">G</div>
+                                {/* Main letter */}
+                                <div className="relative text-6xl font-bold gradient-text">G</div>
+                                
+                                {/* Data visualization dots around the letter */}
+                                <motion.div 
+                                  className="absolute -top-2 -right-2 w-3 h-3 rounded-full bg-neon-cyan/70" 
+                                  animate={{ 
+                                    opacity: [0.4, 1, 0.4],
+                                    scale: [0.8, 1.2, 0.8]
+                                  }}
+                                  transition={{ duration: 2, repeat: Infinity }}
+                                />
+                                <motion.div 
+                                  className="absolute bottom-0 -left-2 w-2 h-2 rounded-full bg-electric-purple/70" 
+                                  animate={{ 
+                                    opacity: [0.3, 0.8, 0.3],
+                                    scale: [0.7, 1.1, 0.7]
+                                  }}
+                                  transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
+                                />
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {/* Orbiting elements */}
+                          <motion.div 
+                            className="absolute top-0 left-0 right-0 bottom-0 rounded-full border border-neon-cyan/20"
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                          >
+                            <motion.div
+                              className="absolute top-0 -translate-x-1/2 left-1/2 w-4 h-4 rounded-full bg-neon-cyan/40"
+                              animate={{ scale: [1, 1.5, 1] }}
+                              transition={{ duration: 2, repeat: Infinity }}
+                            />
+                          </motion.div>
+                          
+                          <motion.div 
+                            className="absolute top-2 left-2 right-2 bottom-2 rounded-full border border-electric-purple/20"
+                            animate={{ rotate: -360 }}
+                            transition={{ duration: 25, repeat: Infinity, ease: "linear" }}
+                          >
+                            <motion.div
+                              className="absolute top-0 -translate-x-1/2 left-1/2 w-3 h-3 rounded-full bg-electric-purple/40"
+                              animate={{ scale: [1, 1.3, 1] }}
+                              transition={{ duration: 3, repeat: Infinity, delay: 1 }}
+                            />
+                          </motion.div>
                         </div>
-                        <h2 className="text-4xl font-bold gradient-text">Glacium</h2>
-                        <p className="text-white/70 mt-2">Est. 2018</p>
+                        
+                        <h2 className="text-4xl font-bold gradient-text relative">
+                          Glacium
+                          <div className="absolute -inset-1 blur-sm bg-gradient-to-r from-neon-cyan/20 to-electric-purple/20 -z-10 rounded-lg"></div>
+                        </h2>
+                        
+                        <div className="flex items-center justify-center space-x-2 mt-2">
+                          <div className="w-2 h-2 rounded-full bg-neon-cyan"></div>
+                          <p className="text-white/70 font-code">Est. 2018</p>
+                          <div className="w-2 h-2 rounded-full bg-electric-purple"></div>
+                        </div>
                       </div>
                     </div>
                     
-                    {/* Decorative elements */}
-                    <div className="absolute top-8 right-8 w-16 h-16 border border-white/20 rounded-full"></div>
-                    <div className="absolute bottom-12 left-10 w-8 h-8 border border-neon-cyan/30 rounded-full"></div>
-                    <div className="absolute top-1/2 left-10 w-12 h-12 border border-electric-purple/30 rounded-lg"></div>
+                    {/* Enhanced decorative elements */}
+                    <motion.div 
+                      className="absolute top-8 right-8 w-16 h-16 border border-white/20 rounded-full"
+                      animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+                      transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                    ></motion.div>
+                    <motion.div 
+                      className="absolute bottom-12 left-10 w-8 h-8 border border-neon-cyan/30 rounded-full"
+                      animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.6, 0.3] }}
+                      transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                    ></motion.div>
+                    <motion.div 
+                      className="absolute top-1/2 left-10 w-12 h-12 border border-electric-purple/30 rounded-lg"
+                      animate={{ rotate: [0, 45, 0], opacity: [0.4, 0.7, 0.4] }}
+                      transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+                    ></motion.div>
+                    
+                    {/* Diagonal line elements */}
+                    <div className="absolute top-0 right-0 w-20 h-[1px] bg-gradient-to-r from-transparent to-neon-cyan/40 transform rotate-45"></div>
+                    <div className="absolute bottom-0 left-0 w-20 h-[1px] bg-gradient-to-r from-electric-purple/40 to-transparent transform -rotate-45"></div>
                   </div>
                 </div>
               </div>

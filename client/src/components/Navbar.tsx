@@ -2,10 +2,14 @@ import { useState, useEffect } from 'react';
 import { Link } from 'wouter';
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import ThemeToggle from './ThemeToggle';
+import { useTheme } from './ThemeProvider';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   
   // Update navbar style on scroll
   useEffect(() => {
@@ -32,10 +36,17 @@ export default function Navbar() {
     <header 
       className={cn(
         "fixed top-0 w-full z-50 transition-all duration-300",
-        isScrolled ? "backdrop-blur-md bg-deep-space/70" : ""
+        isScrolled 
+          ? isDark 
+            ? "backdrop-blur-md bg-deep-space/70" 
+            : "backdrop-blur-md bg-white/80 shadow-md"
+          : ""
       )}
     >
-      <nav className="glass mx-auto px-6 py-4 flex items-center justify-between">
+      <nav className={cn(
+        "mx-auto px-6 py-4 flex items-center justify-between",
+        isDark ? "glass" : "bg-transparent"
+      )}>
         <div className="flex items-center">
           <Link href="/" className="text-2xl font-bold gradient-text">
             Glacium
@@ -43,48 +54,84 @@ export default function Navbar() {
         </div>
         
         {/* Desktop Menu */}
-        <div className="hidden md:flex items-center space-x-8">
+        <div className="hidden md:flex items-center space-x-6">
           <a 
             href="#home" 
-            className="nav-item text-white hover:text-neon-cyan transition-colors"
-            onClick={() => handleNavClick('home')}
+            className={cn(
+              "nav-item hover:text-neon-cyan transition-colors", 
+              isDark ? "text-white" : "text-gray-800"
+            )}
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('home');
+            }}
           >
             Home
           </a>
           <a 
             href="#services" 
-            className="nav-item text-white hover:text-neon-cyan transition-colors"
-            onClick={() => handleNavClick('services')}
+            className={cn(
+              "nav-item hover:text-neon-cyan transition-colors", 
+              isDark ? "text-white" : "text-gray-800"
+            )}
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('services');
+            }}
           >
             Services
           </a>
           <a 
             href="#portfolio" 
-            className="nav-item text-white hover:text-neon-cyan transition-colors"
-            onClick={() => handleNavClick('portfolio')}
+            className={cn(
+              "nav-item hover:text-neon-cyan transition-colors", 
+              isDark ? "text-white" : "text-gray-800"
+            )}
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('portfolio');
+            }}
           >
             Portfolio
           </a>
           <a 
             href="#about" 
-            className="nav-item text-white hover:text-neon-cyan transition-colors"
-            onClick={() => handleNavClick('about')}
+            className={cn(
+              "nav-item hover:text-neon-cyan transition-colors", 
+              isDark ? "text-white" : "text-gray-800"
+            )}
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('about');
+            }}
           >
             About
           </a>
           <a 
             href="#contact" 
-            className="nav-item text-white hover:text-neon-cyan transition-colors"
-            onClick={() => handleNavClick('contact')}
+            className={cn(
+              "nav-item hover:text-neon-cyan transition-colors", 
+              isDark ? "text-white" : "text-gray-800"
+            )}
+            onClick={(e) => {
+              e.preventDefault();
+              handleNavClick('contact');
+            }}
           >
             Contact
           </a>
+          
+          {/* Theme toggle */}
+          <div className="ml-4">
+            <ThemeToggle />
+          </div>
         </div>
         
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center space-x-4">
+          <ThemeToggle />
           <button 
-            className="text-white"
+            className={isDark ? "text-white" : "text-gray-800"}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle mobile menu"
           >
@@ -110,7 +157,12 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div 
-            className="md:hidden glass absolute w-full"
+            className={cn(
+              "md:hidden absolute w-full",
+              isDark 
+                ? "glass" 
+                : "bg-white/90 backdrop-blur-md shadow-md"
+            )}
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -119,36 +171,66 @@ export default function Navbar() {
             <div className="flex flex-col px-6 py-4 space-y-4">
               <a 
                 href="#home" 
-                className="text-white hover:text-neon-cyan transition-colors"
-                onClick={() => handleNavClick('home')}
+                className={cn(
+                  "hover:text-neon-cyan transition-colors",
+                  isDark ? "text-white" : "text-gray-800"
+                )}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('home');
+                }}
               >
                 Home
               </a>
               <a 
                 href="#services" 
-                className="text-white hover:text-neon-cyan transition-colors"
-                onClick={() => handleNavClick('services')}
+                className={cn(
+                  "hover:text-neon-cyan transition-colors",
+                  isDark ? "text-white" : "text-gray-800"
+                )}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('services');
+                }}
               >
                 Services
               </a>
               <a 
                 href="#portfolio" 
-                className="text-white hover:text-neon-cyan transition-colors"
-                onClick={() => handleNavClick('portfolio')}
+                className={cn(
+                  "hover:text-neon-cyan transition-colors",
+                  isDark ? "text-white" : "text-gray-800"
+                )}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('portfolio');
+                }}
               >
                 Portfolio
               </a>
               <a 
                 href="#about" 
-                className="text-white hover:text-neon-cyan transition-colors"
-                onClick={() => handleNavClick('about')}
+                className={cn(
+                  "hover:text-neon-cyan transition-colors",
+                  isDark ? "text-white" : "text-gray-800"
+                )}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('about');
+                }}
               >
                 About
               </a>
               <a 
                 href="#contact" 
-                className="text-white hover:text-neon-cyan transition-colors"
-                onClick={() => handleNavClick('contact')}
+                className={cn(
+                  "hover:text-neon-cyan transition-colors",
+                  isDark ? "text-white" : "text-gray-800"
+                )}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleNavClick('contact');
+                }}
               >
                 Contact
               </a>

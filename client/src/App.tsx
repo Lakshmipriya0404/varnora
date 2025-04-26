@@ -46,7 +46,6 @@ function App() {
       <TooltipProvider>
         <ThemeProvider>
           <Toaster />
-          <ThemeToggle />
           <Router />
         </ThemeProvider>
       </TooltipProvider>
