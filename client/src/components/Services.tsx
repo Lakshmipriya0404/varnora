@@ -99,7 +99,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         />
       </div>
       
-      <p className="text-gray-300 my-4">{description}</p>
+      <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} my-4`}>{description}</p>
       
       {/* Feature list with futuristic styling */}
       <ul className="space-y-3 text-sm font-code">
@@ -207,11 +207,15 @@ const Services = forwardRef<HTMLElement>((props, ref) => {
     <section 
       id="services" 
       ref={ref}
-      className="py-20 md:py-32 relative bg-deep-space circuit-pattern"
+      className={`py-20 md:py-32 relative ${isDark ? 'bg-deep-space' : 'bg-gray-100'} circuit-pattern`}
     >
       {/* Futuristic overlays for depth and style */}
       <div className="absolute inset-0 futuristic-grid pointer-events-none"></div>
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-deep-space to-deep-space/60 pointer-events-none"></div>
+      <div className={`absolute inset-0 bg-gradient-to-b from-transparent ${
+        isDark 
+          ? 'via-deep-space to-deep-space/60' 
+          : 'via-gray-100 to-gray-200/60'
+      } pointer-events-none`}></div>
       
       {/* Glowing orbs as accents */}
       <div className="absolute top-[10%] left-[10%] w-64 h-64 rounded-full bg-electric-purple/5 filter blur-[80px] pointer-events-none"></div>
@@ -256,7 +260,7 @@ const Services = forwardRef<HTMLElement>((props, ref) => {
           </h2>
           
           <motion.p 
-            className="text-gray-300 max-w-2xl mx-auto"
+            className={`${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ delay: 0.4 }}

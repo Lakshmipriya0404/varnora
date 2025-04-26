@@ -245,7 +245,7 @@ const ProjectDetail = ({ projectId, onClose }: { projectId: string, onClose: () 
               <div className="flex flex-wrap gap-8 mb-8">
                 <div className="flex items-center space-x-2">
                   <Clock className="w-5 h-5 text-neon-cyan" />
-                  <span className="text-white/70">{project.timeline}</span>
+                  <span className={`${isDark ? 'text-white/70' : 'text-gray-600'}`}>{project.timeline}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <Users className="w-5 h-5 text-neon-cyan" />
