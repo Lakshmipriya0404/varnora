@@ -1,5 +1,6 @@
-import { forwardRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { forwardRef, useState, useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import { useTheme } from './ThemeProvider';
 import { 
   Phone, 
   Mail, 
@@ -40,6 +41,8 @@ type ContactFormValues = z.infer<typeof formSchema>;
 const Contact = forwardRef<HTMLElement>((props, ref) => {
   const [mapLoaded, setMapLoaded] = useState(false);
   const { toast } = useToast();
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(formSchema),
@@ -79,7 +82,11 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
     <section 
       id="contact" 
       ref={ref}
-      className="py-20 md:py-32 bg-gradient-to-b from-deep-space to-midnight"
+      className={`py-20 md:py-32 ${
+        isDark 
+          ? 'bg-gradient-to-b from-deep-space to-midnight' 
+          : 'bg-gradient-to-b from-gray-50 to-gray-100'
+      }`}
     >
       <div className="container mx-auto px-6">
         <motion.div 
@@ -91,7 +98,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
         >
           <span className="font-code text-neon-cyan">&lt;contact&gt;</span>
           <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4">Get In Touch</h2>
-          <p className="text-gray-300 max-w-2xl mx-auto">
+          <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
             Ready to start your next project? Reach out to discuss how we can help bring your vision to life.
           </p>
         </motion.div>

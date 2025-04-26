@@ -273,7 +273,7 @@ const Hero = forwardRef<HTMLElement>((props, ref) => {
           </div>
           
           <motion.p 
-            className="text-lg md:text-xl mb-8 text-gray-300 font-code pl-1 border-l-4 border-neon-cyan/60 py-2"
+            className={`text-lg md:text-xl mb-8 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'} font-code pl-1 border-l-4 border-neon-cyan/60 py-2`}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
@@ -304,7 +304,7 @@ const Hero = forwardRef<HTMLElement>((props, ref) => {
             
             <motion.a 
               href="#portfolio"
-              className="px-8 py-3 rounded-md glass text-white font-semibold transition-all border border-white/10 relative group overflow-hidden"
+              className={`px-8 py-3 rounded-md glass ${theme === 'dark' ? 'text-white border-white/10' : 'text-gray-800 border-gray-300/30'} font-semibold transition-all border relative group overflow-hidden`}
               onClick={(e) => {
                 e.preventDefault();
                 scrollToSection('portfolio');
