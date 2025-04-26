@@ -42,10 +42,10 @@ export default function ParticleBackground() {
         "rgba(0, 150, 255, alpha)", // blue
       ]
     : [
-        "rgba(0, 180, 216, alpha)", // cyan
-        "rgba(138, 43, 226, alpha)", // purple
-        "rgba(25, 25, 112, alpha)", // dark blue
-        "rgba(30, 144, 255, alpha)", // bright blue
+        "rgba(0, 210, 255, alpha)", // lighter cyan
+        "rgba(157, 0, 255, alpha)", // purple
+        "rgba(50, 50, 80, alpha)", // dark blue
+        "rgba(0, 90, 210, alpha)", // blue
       ];
   
   useEffect(() => {
@@ -76,7 +76,7 @@ export default function ParticleBackground() {
       particlesRef.current = Array.from({ length: count }, () => {
         const size = random(1, 5);
         const colorIndex = Math.floor(random(0, particleColors.length));
-        const opacity = isDark ? random(0.1, 0.6) : random(0.05, 0.2);
+        const opacity = random(0.1, 0.6);
         const color = particleColors[colorIndex].replace('alpha', opacity.toString());
         
         return {
