@@ -10,6 +10,7 @@ import {
   Linkedin,
   Github
 } from 'lucide-react';
+import ContactGlobe from './ContactGlobe';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
