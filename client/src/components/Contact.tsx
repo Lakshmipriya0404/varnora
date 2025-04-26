@@ -1,6 +1,4 @@
-import { forwardRef, useState, useEffect, Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
-import ContactGlobe from './ContactGlobe';
+import { forwardRef, useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useTheme } from './ThemeProvider';
 import { 
@@ -285,18 +283,23 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
               transition={{ duration: 0.5, delay: 0.2 }}
               viewport={{ once: true, margin: "-100px" }}
             >
-              {/* Interactive 3D Globe */}
+              {/* Futuristic visualization */}
               <div className={`w-full h-full rounded overflow-hidden ${
                 isDark ? 'bg-midnight/70' : 'bg-gray-200/70'
               }`}>
-                <Canvas
-                  camera={{ position: [0, 0, 2.5], fov: 45 }}
-                  style={{ height: '100%' }}
-                >
-                  <ambientLight intensity={0.1} />
-                  <pointLight position={[10, 10, 10]} />
-                  <ContactGlobe isDark={isDark} />
-                </Canvas>
+                <div className="relative w-full h-full">
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-32 h-32 rounded-full bg-gradient-to-r from-neon-cyan/20 to-electric-purple/20 animate-pulse"></div>
+                    <div className="absolute w-48 h-48 rounded-full border border-neon-cyan/30 animate-spin-slow"></div>
+                    <div className="absolute w-64 h-64 rounded-full border border-electric-purple/20 animate-reverse-spin"></div>
+                  </div>
+                  <div className="absolute inset-0 bg-grid-pattern opacity-30"></div>
+                  <div className="absolute bottom-4 left-4 right-4 text-center">
+                    <p className={`${isDark ? 'text-gray-400' : 'text-gray-500'} font-code`}>
+                      Digital Innovation Hub
+                    </p>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>
