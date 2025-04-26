@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { random, clamp } from '@/lib/utils';
+import { useTheme } from './ThemeProvider';
 
 interface Particle {
   x: number;
@@ -26,17 +27,26 @@ export default function ParticleBackground() {
   const requestRef = useRef<number>(0);
   const previousTimeRef = useRef<number>(0);
   const mousePosition = useRef<MousePosition>({ x: 0, y: 0 });
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
   
   const [count, setCount] = useState(80); // Increased number of particles
   const [isInteractive, setIsInteractive] = useState(true);
   
   // Colors for particles
-  const particleColors = [
-    "rgba(0, 255, 255, alpha)", // cyan
-    "rgba(157, 0, 255, alpha)", // purple
-    "rgba(255, 255, 255, alpha)", // white
-    "rgba(0, 150, 255, alpha)", // blue
-  ];
+  const particleColors = isDark 
+    ? [
+        "rgba(0, 255, 255, alpha)", // cyan
+        "rgba(157, 0, 255, alpha)", // purple
+        "rgba(255, 255, 255, alpha)", // white
+        "rgba(0, 150, 255, alpha)", // blue
+      ]
+    : [
+        "rgba(0, 210, 255, alpha)", // lighter cyan
+        "rgba(157, 0, 255, alpha)", // purple
+        "rgba(50, 50, 80, alpha)", // dark blue
+        "rgba(0, 90, 210, alpha)", // blue
+      ];
   
   useEffect(() => {
     if (!containerRef.current || !canvasRef.current) return;
@@ -174,7 +184,9 @@ export default function ParticleBackground() {
           if (distance < particle.connectionRadius) {
             // Connection opacity based on distance
             const opacity = (1 - distance / particle.connectionRadius) * 0.3;
-            ctx.strokeStyle = `rgba(255, 255, 255, ${opacity})`;
+            // Different connection color based on theme
+            const connectionColor = isDark ? '255, 255, 255' : '50, 50, 80';
+            ctx.strokeStyle = `rgba(${connectionColor}, ${opacity})`;
             ctx.lineWidth = 0.5;
             ctx.beginPath();
             ctx.moveTo(particle.x, particle.y);
@@ -199,7 +211,7 @@ export default function ParticleBackground() {
       container.removeEventListener('touchmove', handleTouchMove);
       window.removeEventListener('resize', updateCanvasSize);
     };
-  }, [count, isInteractive]);
+  }, [count, isInteractive, theme]);
   
   return (
     <motion.div 
@@ -210,7 +222,11 @@ export default function ParticleBackground() {
       transition={{ duration: 1.5 }}
     >
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-radial from-transparent via-deep-space/30 to-deep-space/80 pointer-events-none"></div>
+      <div className={`absolute inset-0 bg-gradient-radial pointer-events-none ${
+        isDark 
+          ? 'from-transparent via-deep-space/30 to-deep-space/80' 
+          : 'from-transparent via-gray-100/30 to-gray-200/80'
+      }`}></div>
       
       {/* Canvas for particles */}
       <canvas 
