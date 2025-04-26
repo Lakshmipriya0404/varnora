@@ -67,7 +67,7 @@ const ProjectDetail = () => {
         {/* Back to portfolio button */}
         <div className="absolute top-8 left-8 z-10">
           <motion.button
-            className="flex items-center gap-2 px-4 py-2 glass rounded-full hover:bg-white/10 transition-colors"
+            className={`flex items-center gap-2 px-4 py-2 glass rounded-full ${isDark ? 'hover:bg-white/10' : 'hover:bg-blue-50/50'} transition-colors`}
             onClick={() => setLocation('/')}
             whileHover={{ x: -5 }}
             whileTap={{ scale: 0.95 }}
@@ -93,7 +93,7 @@ const ProjectDetail = () => {
       
       {/* Project Metadata */}
       <div className="container mx-auto px-6 py-10">
-        <div className="glass rounded-lg p-6 grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+        <div className={`glass rounded-lg p-6 grid grid-cols-1 md:grid-cols-3 gap-6 mb-16 ${isDark ? '' : 'bg-white/90 shadow-[0_8px_32px_-4px_rgba(0,180,216,0.15)]'}`}>
           <div className="flex items-center space-x-4">
             <div className="w-12 h-12 rounded-full bg-neon-cyan/20 flex items-center justify-center">
               <Clock className="w-6 h-6 text-neon-cyan" />
@@ -189,13 +189,13 @@ const ProjectDetail = () => {
                     />
                   </div>
                   
-                  <div className="glass rounded-lg p-6">
+                  <div className={`glass rounded-lg p-6 ${isDark ? '' : 'bg-gradient-to-br from-blue-50/30 to-white/90'}`}>
                     <h3 className="text-xl font-bold mb-4 gradient-text">Project Highlights</h3>
                     <ul className="space-y-3">
                       {project.highlights.map((highlight, idx) => (
                         <li key={idx} className="flex items-start">
                           <ChevronRight className="w-5 h-5 text-neon-cyan flex-shrink-0 mt-0.5 mr-2" />
-                          <span>{highlight}</span>
+                          <span className={isDark ? '' : 'text-gray-700'}>{highlight}</span>
                         </li>
                       ))}
                     </ul>
@@ -204,8 +204,8 @@ const ProjectDetail = () => {
               </div>
               
               {/* Testimonial */}
-              <div className="glass rounded-lg p-8 border-l-4 border-electric-purple max-w-3xl mx-auto">
-                <blockquote className="text-lg italic mb-4">"{project.testimonial.text}"</blockquote>
+              <div className={`glass rounded-lg p-8 border-l-4 border-electric-purple max-w-3xl mx-auto ${isDark ? '' : 'bg-blue-50/20'}`}>
+                <blockquote className={`text-lg italic mb-4 ${isDark ? '' : 'text-gray-700'}`}>"{project.testimonial.text}"</blockquote>
                 <footer className={`text-right ${isDark ? 'text-white/70' : 'text-gray-600'}`}>— {project.testimonial.author}</footer>
               </div>
             </motion.div>
@@ -226,7 +226,7 @@ const ProjectDetail = () => {
                 </p>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                  <div className="glass rounded-lg p-6">
+                  <div className={`glass rounded-lg p-6 ${isDark ? '' : 'bg-gradient-to-br from-blue-50/20 to-white/80'}`}>
                     <h3 className="text-xl font-bold mb-4">Technologies Used</h3>
                     <ul className="space-y-3">
                       {project.tags.map((tag, idx) => (
@@ -234,13 +234,13 @@ const ProjectDetail = () => {
                           <div className="w-8 h-8 rounded-full bg-neon-cyan/20 flex items-center justify-center mr-3">
                             <span className="text-neon-cyan font-bold">{idx + 1}</span>
                           </div>
-                          <span>{tag}</span>
+                          <span className={isDark ? '' : 'text-gray-700'}>{tag}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
                   
-                  <div className="glass rounded-lg p-6">
+                  <div className={`glass rounded-lg p-6 ${isDark ? '' : 'bg-gradient-to-br from-blue-50/30 to-white/90'}`}>
                     <h3 className="text-xl font-bold mb-4">Development Approach</h3>
                     <p className={`${isDark ? 'text-white/70' : 'text-gray-600'} mb-4`}>
                       We followed an agile methodology, working in close collaboration with the client throughout the development process. This allowed us to adapt quickly to changing requirements and deliver incremental value.
@@ -251,7 +251,7 @@ const ProjectDetail = () => {
                   </div>
                 </div>
                 
-                <div className="glass rounded-lg p-6 mb-8">
+                <div className={`glass rounded-lg p-6 mb-8 ${isDark ? '' : 'bg-gradient-to-br from-blue-50/10 to-white/90 shadow-[0_4px_20px_-4px_rgba(0,180,216,0.1)]'}`}>
                   <h3 className="text-xl font-bold mb-4">Key Features</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {project.highlights.map((highlight, idx) => (
@@ -344,7 +344,7 @@ const ProjectDetail = () => {
               .map((relatedProject, idx) => (
                 <div 
                   key={idx} 
-                  className="glass rounded-lg overflow-hidden cursor-pointer group"
+                  className={`glass rounded-lg overflow-hidden cursor-pointer group ${isDark ? '' : 'bg-white/90 hover:shadow-[0_8px_30px_-4px_rgba(0,180,216,0.2)]'}`}
                   onClick={() => {
                     setLocation(`/portfolio/${relatedProject.id}`);
                     window.scrollTo(0, 0);
@@ -371,7 +371,7 @@ const ProjectDetail = () => {
         </div>
         
         {/* CTA Section */}
-        <div className="text-center mb-20">
+        <div className={`text-center mb-20 ${isDark ? '' : 'p-10 rounded-xl bg-gradient-to-br from-blue-50/50 to-white/80'}`}>
           <h2 className="text-3xl font-bold mb-4">Start Your Project With Us</h2>
           <p className={`${isDark ? 'text-white/70' : 'text-gray-600'} max-w-2xl mx-auto mb-8`}>
             Ready to bring your digital vision to life? Let's create something extraordinary together.
