@@ -395,7 +395,7 @@ const About = forwardRef<HTMLElement>((props, ref) => {
     <section 
       id="about" 
       ref={ref}
-      className="relative overflow-hidden bg-deep-space"
+      className={`relative overflow-hidden ${isDark ? 'bg-deep-space' : 'bg-gray-50'}`}
     >
       {/* Hero section with parallax effect */}
       <div 
@@ -404,7 +404,11 @@ const About = forwardRef<HTMLElement>((props, ref) => {
       >
         {/* Parallax background elements */}
         <motion.div 
-          className="absolute inset-0 bg-gradient-radial from-midnight/40 to-deep-space"
+          className={`absolute inset-0 ${
+            isDark 
+              ? 'bg-gradient-radial from-midnight/40 to-deep-space' 
+              : 'bg-gradient-radial from-gray-200/70 to-gray-50'
+          }`}
           style={{ y: heroY, opacity: heroOpacity }}
         ></motion.div>
         
@@ -537,7 +541,7 @@ const About = forwardRef<HTMLElement>((props, ref) => {
                         {/* Animated logo with cyberpunk effect */}
                         <div className="relative w-36 h-36 mx-auto mb-6">
                           <div className="absolute inset-0 rounded-full bg-gradient-to-br from-neon-cyan to-electric-purple p-[1px] animate-pulse">
-                            <div className="w-full h-full rounded-full bg-deep-space flex items-center justify-center">
+                            <div className={`w-full h-full rounded-full ${isDark ? 'bg-deep-space' : 'bg-white'} flex items-center justify-center`}>
                               {/* Animated letter G */}
                               <div className="relative">
                                 {/* Glow effect */}
@@ -599,7 +603,7 @@ const About = forwardRef<HTMLElement>((props, ref) => {
                         
                         <div className="flex items-center justify-center space-x-2 mt-2">
                           <div className="w-2 h-2 rounded-full bg-neon-cyan"></div>
-                          <p className="text-white/70 font-code">Est. 2018</p>
+                          <p className={`${isDark ? 'text-white/70' : 'text-gray-600'} font-code`}>Est. 2018</p>
                           <div className="w-2 h-2 rounded-full bg-electric-purple"></div>
                         </div>
                       </div>
@@ -642,11 +646,11 @@ const About = forwardRef<HTMLElement>((props, ref) => {
                 <h2 className="text-5xl font-bold mb-6">Our Story</h2>
                 <div className="h-1 w-20 bg-gradient-to-r from-neon-cyan to-electric-purple mb-6"></div>
                 
-                <p className="text-gray-300 text-lg mb-6 leading-relaxed">
+                <p className={`${isDark ? 'text-gray-300' : 'text-gray-700'} text-lg mb-6 leading-relaxed`}>
                   Founded in 2018, Glacium brings together a diverse team of designers, developers, and digital strategists with a shared passion for creating extraordinary digital experiences.
                 </p>
                 
-                <p className="text-gray-300 mb-8 leading-relaxed">
+                <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} mb-8 leading-relaxed`}>
                   We believe in pushing the boundaries of what's possible on the web, combining cutting-edge technology with thoughtful design to create solutions that not only look stunning but also perform exceptionally.
                 </p>
                 
@@ -702,9 +706,13 @@ const About = forwardRef<HTMLElement>((props, ref) => {
       {/* Core values section */}
       <div 
         ref={valuesRef}
-        className="py-20 relative"
+        className={`py-20 relative ${isDark ? '' : 'bg-white'}`}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-deep-space via-midnight/50 to-deep-space"></div>
+        <div className={`absolute inset-0 ${
+          isDark 
+            ? 'bg-gradient-to-b from-deep-space via-midnight/50 to-deep-space' 
+            : 'bg-gradient-to-b from-gray-50 via-white to-gray-50'
+        }`}></div>
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div 
@@ -716,7 +724,7 @@ const About = forwardRef<HTMLElement>((props, ref) => {
           >
             <span className="font-code text-neon-cyan">&lt;values&gt;</span>
             <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4">Our Core Values</h2>
-            <p className="text-gray-300 max-w-2xl mx-auto">
+            <p className={`max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
               These principles guide everything we do, from client interactions to the smallest details in our work.
             </p>
           </motion.div>
@@ -764,9 +772,13 @@ const About = forwardRef<HTMLElement>((props, ref) => {
       <div 
         id="team"
         ref={teamRef}
-        className="py-20 relative bg-deep-space"
+        className={`py-20 relative ${isDark ? 'bg-deep-space' : 'bg-gray-100'}`}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-deep-space via-midnight/30 to-deep-space"></div>
+        <div className={`absolute inset-0 ${
+          isDark 
+            ? 'bg-gradient-to-b from-deep-space via-midnight/30 to-deep-space' 
+            : 'bg-gradient-to-b from-gray-100 via-white/80 to-gray-100'
+        }`}></div>
         
         <div className="container mx-auto px-6 relative z-10">
           <motion.div 
@@ -778,7 +790,7 @@ const About = forwardRef<HTMLElement>((props, ref) => {
           >
             <span className="font-code text-neon-cyan">&lt;team&gt;</span>
             <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4">Meet Our Team</h2>
-            <p className="text-gray-300 max-w-2xl mx-auto">
+            <p className={`max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
               The talented individuals who bring our vision to life and push the boundaries of digital creation.
             </p>
           </motion.div>
@@ -799,7 +811,7 @@ const About = forwardRef<HTMLElement>((props, ref) => {
           >
             <div className="glass p-8 rounded-lg max-w-2xl mx-auto cyber-scanline">
               <h3 className="text-2xl font-bold mb-4">Join Our Team</h3>
-              <p className="text-gray-300 mb-6">
+              <p className={`mb-6 ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
                 We're always looking for talented individuals to join our creative collective. If you're passionate about digital innovation, we'd love to hear from you.
               </p>
               <a 
