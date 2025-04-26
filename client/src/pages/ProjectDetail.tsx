@@ -96,7 +96,7 @@ const ProjectDetail = () => {
             </div>
             <div>
               <h3 className="text-lg font-medium">Timeline</h3>
-              <p className="text-white/70">{project.timeline}</p>
+              <p className={isDark ? "text-white/70" : "text-gray-600"}>{project.timeline}</p>
             </div>
           </div>
           
@@ -106,7 +106,7 @@ const ProjectDetail = () => {
             </div>
             <div>
               <h3 className="text-lg font-medium">Team</h3>
-              <p className="text-white/70">{project.team}</p>
+              <p className={isDark ? "text-white/70" : "text-gray-600"}>{project.team}</p>
             </div>
           </div>
           
@@ -116,7 +116,7 @@ const ProjectDetail = () => {
             </div>
             <div>
               <h3 className="text-lg font-medium">Key Result</h3>
-              <p className="text-white/70">{project.results[0]}</p>
+              <p className={isDark ? "text-white/70" : "text-gray-600"}>{project.results[0]}</p>
             </div>
           </div>
         </div>
@@ -177,7 +177,7 @@ const ProjectDetail = () => {
                 </div>
                 
                 <div className="space-y-8">
-                  <div className="rounded-lg overflow-hidden border border-white/10">
+                  <div className={`rounded-lg overflow-hidden border ${isDark ? 'border-white/10' : 'border-gray-300/30'}`}>
                     <img 
                       src={project.image} 
                       alt={project.title} 
@@ -369,7 +369,7 @@ const ProjectDetail = () => {
         {/* CTA Section */}
         <div className="text-center mb-20">
           <h2 className="text-3xl font-bold mb-4">Start Your Project With Us</h2>
-          <p className="text-white/70 max-w-2xl mx-auto mb-8">
+          <p className={`${isDark ? 'text-white/70' : 'text-gray-600'} max-w-2xl mx-auto mb-8`}>
             Ready to bring your digital vision to life? Let's create something extraordinary together.
           </p>
           <motion.a 
