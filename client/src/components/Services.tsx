@@ -50,7 +50,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   
   return (
     <motion.div 
-      className={`gradient-border p-6 glass rounded-lg relative overflow-hidden ${corners[index % corners.length]} ${effects[index % effects.length]}`}
+      className={`gradient-border p-6 ${isDark ? 'glass' : 'bg-gray-100/70'} rounded-lg relative overflow-hidden ${corners[index % corners.length]} ${effects[index % effects.length]}`}
       initial={{ opacity: 0, y: 50 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, delay }}
