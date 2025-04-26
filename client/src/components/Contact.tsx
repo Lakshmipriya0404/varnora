@@ -43,7 +43,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
   const { toast } = useToast();
   const { theme } = useTheme();
   const isDark = theme === 'dark';
-  
+
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -53,7 +53,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
       message: "",
     },
   });
-  
+
   const mutation = useMutation({
     mutationFn: (values: ContactFormValues) => {
       return apiRequest('POST', '/api/contact', values);
@@ -73,11 +73,11 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
       });
     },
   });
-  
+
   function onSubmit(values: ContactFormValues) {
     mutation.mutate(values);
   }
-  
+
   return (
     <section 
       id="contact" 
@@ -102,7 +102,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
             Ready to start your next project? Reach out to discuss how we can help bring your vision to life.
           </p>
         </motion.div>
-        
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           <motion.div 
             className="glass rounded-lg p-8 animate-glow"
@@ -112,7 +112,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
             viewport={{ once: true, margin: "-100px" }}
           >
             <h3 className="text-2xl font-bold mb-6">Send us a message</h3>
-            
+
             <Form {...form}>
               <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                 <FormField
@@ -136,7 +136,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                     </FormItem>
                   )}
                 />
-                
+
                 <FormField
                   control={form.control}
                   name="email"
@@ -158,7 +158,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                     </FormItem>
                   )}
                 />
-                
+
                 <FormField
                   control={form.control}
                   name="subject"
@@ -180,7 +180,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                     </FormItem>
                   )}
                 />
-                
+
                 <FormField
                   control={form.control}
                   name="message"
@@ -203,7 +203,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                     </FormItem>
                   )}
                 />
-                
+
                 <Button 
                   type="submit" 
                   className="w-full px-8 py-3 rounded-md animate-gradient text-white font-semibold hover:opacity-90"
@@ -214,7 +214,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
               </form>
             </Form>
           </motion.div>
-          
+
           <div>
             <motion.div 
               className="glass rounded-lg p-8 mb-8"
@@ -224,7 +224,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
               viewport={{ once: true, margin: "-100px" }}
             >
               <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
-              
+
               <div className="space-y-4">
                 <div className="flex items-start">
                   <div className="flex-shrink-0 h-10 w-10 rounded-full bg-neon-cyan/20 flex items-center justify-center mr-3">
@@ -235,7 +235,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                     <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>+1 (555) 123-4567</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <div className="flex-shrink-0 h-10 w-10 rounded-full bg-neon-cyan/20 flex items-center justify-center mr-3">
                     <Mail className="h-5 w-5 text-neon-cyan" />
@@ -245,7 +245,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                     <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>hello@glacium.com</p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-start">
                   <div className="flex-shrink-0 h-10 w-10 rounded-full bg-neon-cyan/20 flex items-center justify-center mr-3">
                     <MapPin className="h-5 w-5 text-neon-cyan" />
@@ -256,7 +256,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                   </div>
                 </div>
               </div>
-              
+
               <div className="mt-8">
                 <h4 className="font-medium mb-4">Follow Us</h4>
                 <div className="flex space-x-4">
@@ -275,7 +275,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                 </div>
               </div>
             </motion.div>
-            
+
             <motion.div 
               className="glass rounded-lg p-6 h-64"
               initial={{ opacity: 0, y: 30 }}
@@ -287,19 +287,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
               <div className={`w-full h-full rounded overflow-hidden ${
                 isDark ? 'bg-midnight/70' : 'bg-gray-200/70'
               }`}>
-                <div className="relative w-full h-full">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-32 h-32 rounded-full bg-gradient-to-r from-neon-cyan/20 to-electric-purple/20 animate-pulse"></div>
-                    <div className="absolute w-48 h-48 rounded-full border border-neon-cyan/30 animate-spin-slow"></div>
-                    <div className="absolute w-64 h-64 rounded-full border border-electric-purple/20 animate-reverse-spin"></div>
-                  </div>
-                  <div className="absolute inset-0 bg-grid-pattern opacity-30"></div>
-                  <div className="absolute bottom-4 left-4 right-4 text-center">
-                    <p className={`${isDark ? 'text-gray-400' : 'text-gray-500'} font-code`}>
-                      Digital Innovation Hub
-                    </p>
-                  </div>
-                </div>
+                <ContactGlobe />
               </div>
             </motion.div>
           </div>
