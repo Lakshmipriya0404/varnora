@@ -225,3 +225,99 @@
 .circuit-pattern {
   background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cpath d='M36 34c4.418 0 8-3.582 8-8s-3.582-8-8-8-8 3.582-8 8 3.582 8 8 8z' stroke='rgba(255, 255, 255, 0.1)' stroke-width='2'/%3E%3Cpath d='M13 18a3 3 0 100-6 3 3 0 000 6' stroke='rgba(0, 255, 255, 0.2)' stroke-width='1'/%3E%3Cpath d='M52 42a2 2 0 100-4 2 2 0 000 4' stroke='rgba(157, 0, 255, 0.2)' stroke-width='1'/%3E%3Cpath d='M10 28h8M28 10v8' stroke='rgba(255, 255, 255, 0.1)' stroke-width='1'/%3E%3C/g%3E%3C/svg%3E");
 }
+
+/* Futuristic background effects */
+.bg-gradient-radial {
+  background: radial-gradient(circle at center, var(--gradient-start), var(--gradient-end));
+}
+
+.futuristic-grid {
+  background-image: 
+    linear-gradient(to right, hsla(var(--neon-cyan), 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, hsla(var(--neon-cyan), 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+}
+
+.cyberpunk-slash {
+  position: relative;
+  overflow: hidden;
+}
+
+.cyberpunk-slash::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -150%;
+  width: 150%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    hsla(var(--neon-cyan), 0.4),
+    hsla(var(--electric-purple), 0.2),
+    transparent
+  );
+  z-index: 10;
+  animation: cyber-slash 5s ease-in-out infinite alternate;
+}
+
+@keyframes cyber-slash {
+  0% {
+    transform: translateX(0) skewX(-45deg);
+    opacity: 0;
+  }
+  10%, 15% {
+    opacity: 0.6;
+  }
+  30%, 100% {
+    transform: translateX(200%) skewX(-45deg);
+    opacity: 0;
+  }
+}
+
+.cyber-dots {
+  background-image: radial-gradient(
+    hsla(var(--neon-cyan), 0.2) 1px, 
+    transparent 1px
+  ),
+  radial-gradient(
+    hsla(var(--electric-purple), 0.2) 1px, 
+    transparent 1px
+  );
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+}
+
+.cyber-scanline {
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-scanline::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    transparent, 
+    hsla(var(--neon-cyan), 0.3), 
+    hsla(var(--neon-cyan), 0.5), 
+    hsla(var(--neon-cyan), 0.3),
+    transparent
+  );
+  z-index: 10;
+  animation: scanline 6s ease-in-out infinite;
+  opacity: 0.75;
+}
+
+@keyframes scanline {
+  0% {
+    transform: translateY(-100px);
+  }
+  70%, 100% {
+    transform: translateY(100vh);
+  }
+}
