@@ -12,7 +12,8 @@ import {
   Sparkles,
   Heart,
   Clock,
-  Compass
+  Compass,
+  Database
 } from 'lucide-react';
 
 // Enhanced team data with bios and social links
@@ -106,55 +107,55 @@ const teamMembers = [
   }
 ];
 
-// Company timeline
-const companyTimeline = [
+// Project development cycle
+const projectDevelopmentCycle = [
   {
-    year: "2018",
-    title: "Founding",
-    description: "Glacium was established with a vision to blend cutting-edge technology with exceptional design.",
-    icon: <Rocket />
-  },
-  {
-    year: "2019",
-    title: "First Major Project",
-    description: "Completed our first enterprise-level application, establishing our reputation for quality.",
-    icon: <Shapes />
-  },
-  {
-    year: "2020",
-    title: "Remote Transformation",
-    description: "Pivoted to a fully distributed team while doubling our client portfolio.",
-    icon: <Globe />
-  },
-  {
-    year: "2021",
-    title: "Expansion",
-    description: "Grew our team to 15 members and expanded our service offerings to include 3D and motion design.",
-    icon: <Users />
-  },
-  {
-    year: "2022",
-    title: "Award Recognition",
-    description: "Received multiple industry awards for our innovative approach to digital experiences.",
-    icon: <Sparkles />
-  },
-  {
-    year: "2023",
-    title: "Global Reach",
-    description: "Expanded our client base internationally, working with companies across five continents.",
+    phase: "01",
+    title: "Discovery",
+    description: "Deep research and stakeholder interviews to understand business goals and user needs.",
     icon: <Compass />
   },
   {
-    year: "2024",
-    title: "Innovation Lab",
-    description: "Launched our R&D division focused on exploring emerging technologies and creative techniques.",
+    phase: "02",
+    title: "Concept & Strategy",
+    description: "Define project scope, create user personas, and develop a comprehensive digital strategy.",
     icon: <Lightbulb />
   },
   {
-    year: "2025",
-    title: "Today",
-    description: "Continuing to push boundaries and create exceptional digital experiences for our clients.",
-    icon: <Heart />
+    phase: "03",
+    title: "UX Architecture",
+    description: "Design information architecture, create wireframes, and establish user flows and interactions.",
+    icon: <Shapes />
+  },
+  {
+    phase: "04",
+    title: "Visual Design",
+    description: "Create a stunning visual language with mood boards, UI components, and interactive prototypes.",
+    icon: <Sparkles />
+  },
+  {
+    phase: "05",
+    title: "Frontend Development",
+    description: "Transform designs into responsive, accessible, and performant code using modern frameworks.",
+    icon: <Code />
+  },
+  {
+    phase: "06",
+    title: "Backend Integration",
+    description: "Build scalable APIs, implement security protocols, and connect to data sources and third-party services.",
+    icon: <Database />
+  },
+  {
+    phase: "07",
+    title: "Quality Assurance",
+    description: "Rigorous testing across devices, performance optimization, and accessibility compliance.",
+    icon: <Zap />
+  },
+  {
+    phase: "08",
+    title: "Deployment & Growth",
+    description: "Launch with CI/CD pipelines, implement analytics, and provide continuous improvement strategies.",
+    icon: <Rocket />
   }
 ];
 
@@ -275,6 +276,9 @@ const TeamMemberCard = ({ member, index }: { member: typeof teamMembers[0], inde
 // Animated timeline component
 const Timeline = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  
   const { scrollYProgress } = useScroll({ 
     target: containerRef,
     offset: ["start end", "end end"]
@@ -285,14 +289,14 @@ const Timeline = () => {
   return (
     <div className="relative py-12" ref={containerRef}>
       {/* Timeline line */}
-      <div className="absolute left-[26px] md:left-1/2 md:transform md:-translate-x-px top-0 bottom-0 w-px bg-white/10"></div>
+      <div className={`absolute left-[26px] md:left-1/2 md:transform md:-translate-x-px top-0 bottom-0 w-px ${isDark ? 'bg-white/10' : 'bg-gray-200'}`}></div>
       <motion.div 
         className="absolute left-[26px] md:left-1/2 md:transform md:-translate-x-px top-0 w-px bg-neon-cyan"
         style={{ height: lineHeight }}
       ></motion.div>
       
       <div className="relative">
-        {companyTimeline.map((item, index) => (
+        {projectDevelopmentCycle.map((item, index) => (
           <div key={index} className={`mb-12 flex ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
             <motion.div 
               className={`relative z-10 md:w-1/2 ${
@@ -303,20 +307,25 @@ const Timeline = () => {
               transition={{ duration: 0.5 }}
               viewport={{ once: true }}
             >
-              <div className={`inline-block ${index % 2 === 0 ? 'md:float-right' : ''}`}>
-                <span className="text-neon-cyan font-code font-bold block">{item.year}</span>
-                <h4 className="text-xl font-bold mt-1 mb-2 gradient-text">{item.title}</h4>
-                <p className="text-gray-300 max-w-md">{item.description}</p>
+              <div className={`inline-block ${index % 2 === 0 ? 'md:float-right' : ''} pb-4`}>
+                <span className="text-neon-cyan font-code font-bold text-2xl block mb-1">{item.phase}</span>
+                <h4 className="text-xl font-bold mb-2 gradient-text">{item.title}</h4>
+                <p className={`max-w-md ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{item.description}</p>
               </div>
             </motion.div>
             
             <div className="absolute left-0 md:left-1/2 md:transform md:-translate-x-1/2 flex items-center justify-center">
               <motion.div 
-                className="w-14 h-14 rounded-full bg-deep-space border-2 border-neon-cyan flex items-center justify-center"
+                className={`w-14 h-14 rounded-full border-2 flex items-center justify-center ${
+                  isDark 
+                    ? 'bg-deep-space border-neon-cyan text-white'
+                    : 'bg-white border-neon-cyan text-gray-800 shadow-md shadow-neon-cyan/20'
+                }`}
                 initial={{ scale: 0, opacity: 0 }}
                 whileInView={{ scale: 1, opacity: 1 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
                 viewport={{ once: true }}
+                whileHover={{ scale: 1.1, boxShadow: "0 0 20px rgba(0, 255, 255, 0.5)" }}
               >
                 {item.icon}
               </motion.div>
@@ -332,6 +341,9 @@ const Timeline = () => {
 
 // Core value card
 const CoreValueCard = ({ value, index }: { value: typeof coreValues[0], index: number }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark';
+  
   return (
     <motion.div 
       className="glass rounded-lg overflow-hidden relative group cyberpunk-slash"
@@ -346,7 +358,7 @@ const CoreValueCard = ({ value, index }: { value: typeof coreValues[0], index: n
           {value.icon}
         </div>
         <h4 className="text-xl font-bold mb-2">{value.title}</h4>
-        <p className="text-gray-300">{value.description}</p>
+        <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>{value.description}</p>
       </div>
     </motion.div>
   );
@@ -717,11 +729,11 @@ const About = forwardRef<HTMLElement>((props, ref) => {
         </div>
       </div>
       
-      {/* Company timeline */}
+      {/* Project Development Cycle */}
       <div 
         id="timeline"
         ref={timelineRef}
-        className="py-20 relative bg-deep-space"
+        className={`py-20 relative ${isDark ? 'bg-deep-space' : 'bg-gray-50'}`}
       >
         <div className="absolute inset-0 futuristic-grid opacity-30"></div>
         
@@ -733,10 +745,10 @@ const About = forwardRef<HTMLElement>((props, ref) => {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <span className="font-code text-neon-cyan">&lt;timeline&gt;</span>
-            <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4">Our Journey</h2>
-            <p className="text-gray-300 max-w-2xl mx-auto">
-              From humble beginnings to where we are today, see how we've evolved over the years.
+            <span className="font-code text-neon-cyan">&lt;process&gt;</span>
+            <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4">Project Development Cycle</h2>
+            <p className={`max-w-2xl mx-auto ${isDark ? 'text-gray-300' : 'text-gray-600'}`}>
+              Our systematic approach to every project ensures exceptional results, from initial discovery to deployment and growth.
             </p>
           </motion.div>
           
