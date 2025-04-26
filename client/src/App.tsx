@@ -11,7 +11,7 @@ import ThemeToggle from "@/components/ThemeToggle";
 import { AnimatePresence } from "framer-motion";
 
 // Lazy load project detail page for better performance
-const ProjectDetailPage = lazy(() => import("@/pages/ProjectDetail"));
+const ProjectDetailPage = lazy(() => import("./pages/ProjectDetail"));
 
 function Router() {
   const [location] = useLocation();
