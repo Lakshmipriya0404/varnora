@@ -3,177 +3,141 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion'
 import { Link, useLocation } from 'wouter';
 import { useTheme } from './ThemeProvider';
 import { ArrowRight, X, ChevronRight, ExternalLink, Clock, Award, Users } from 'lucide-react';
+import chatbot from '@/images/chatbot.png'
+import videostream from '@/images/videostream.png'
+import rja from '@/images/rja.png';
+import npm from '@/images/npm.png';
+import pp from '@/images/pp.png';
 
 // Enhanced portfolio items with more details
 export const portfolioItems = [
   {
-    id: "nova-ecommerce",
-    title: "Nova E-commerce Platform",
+    id: "character-chat-bot",
+    title: "Character Chat Bot",
     subtitle: "Redefining Online Shopping",
-    description: "Modern e-commerce experience with dynamic product filtering and AR try-on feature.",
-    tags: ["React", "Node.js", "Shopify"],
-    image: "https://images.unsplash.com/photo-1620325867502-221cfb5faa5f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
-    fullDescription: "Nova is a next-generation e-commerce platform that leverages cutting-edge technology to create an immersive shopping experience. The platform includes advanced product filtering, AR try-on capabilities, and personalized recommendations powered by machine learning algorithms.",
-    challenge: "The client needed a solution that would stand out in the crowded e-commerce space and provide unique features that would increase engagement and conversion rates.",
-    solution: "We developed a custom React-based frontend with a Node.js backend integrated with Shopify's APIs. The AR try-on feature was built using WebXR, allowing customers to visualize products in their own space before purchase.",
+    description:
+      "build an advanced SaaS AI Companion focusing on long-term memory retention, fast caching, and efficient data management.",
+    tags: ["Next.js", "Prisma", "Tailwind"],
+    image: chatbot,
+    fullDescription:
+      "Nova is a next-generation e-commerce platform that leverages cutting-edge technology to create an immersive shopping experience. The platform includes advanced product filtering, AR try-on capabilities, and personalized recommendations powered by machine learning algorithms.",
+    challenge:
+      "The client needed a solution that would stand out in the crowded e-commerce space and provide unique features that would increase engagement and conversion rates.",
+    solution:
+      "We developed a custom React-based frontend with a Node.js backend integrated with Shopify's APIs. The AR try-on feature was built using WebXR, allowing customers to visualize products in their own space before purchase.",
     results: [
       "43% increase in conversion rate",
       "27% decrease in product returns",
-      "86% user satisfaction rating"
+      "86% user satisfaction rating",
     ],
     testimonial: {
       text: "The AR feature has completely transformed our business model. Customers love being able to 'try before they buy' and it's significantly reduced our return rates.",
-      author: "Sarah Johnson, CEO of Nova Retail"
+      author: "Sarah Johnson, CEO of Nova Retail",
     },
     highlights: [
       "Seamless integration with existing inventory systems",
       "Real-time inventory management",
       "Mobile-first responsive design",
-      "Advanced analytics dashboard"
+      "Advanced analytics dashboard",
     ],
     timeline: "6 months",
-    team: "5 developers, 2 designers, 1 project manager"
+    team: "5 developers, 2 designers, 1 project manager",
   },
   {
-    id: "pulse-finance",
-    title: "Pulse Financial Dashboard",
-    subtitle: "Visualizing Financial Data",
-    description: "Interactive financial analytics platform with real-time data visualization.",
-    tags: ["Vue.js", "D3.js", "Express"],
-    image: "https://images.unsplash.com/photo-1551650975-87deedd944c3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
-    fullDescription: "Pulse is a comprehensive financial dashboard that provides real-time analytics and visualization of complex financial data. It helps financial advisors and their clients make informed investment decisions through intuitive charts and customizable reports.",
-    challenge: "The client needed a way to present complex financial data in an accessible format that both financial professionals and their clients could easily understand.",
-    solution: "We built a Vue.js application with D3.js visualizations that presents financial data in interactive, easy-to-understand formats. The Express backend interfaces with various financial APIs to provide real-time data updates.",
+    id: "real-time video streaming and interactive broadcasting",
+    title: "Real-Time Video Streaming and Interactive Broadcasting",
+    subtitle: "Real-Time Video Communication",
+    description:
+      " Platform for real-time video streaming and interactive broadcasting and ensure a seamless and scalable user experience.",
+    tags: ["React", "Node.js", "MySQL"],
+    image: videostream,
+    fullDescription:
+      "Pulse is a comprehensive financial dashboard that provides real-time analytics and visualization of complex financial data. It helps financial advisors and their clients make informed investment decisions through intuitive charts and customizable reports.",
+    challenge:
+      "The client needed a way to present complex financial data in an accessible format that both financial professionals and their clients could easily understand.",
+    solution:
+      "We built a Vue.js application with D3.js visualizations that presents financial data in interactive, easy-to-understand formats. The Express backend interfaces with various financial APIs to provide real-time data updates.",
     results: [
       "65% reduction in time spent analyzing data",
       "98% accuracy in financial forecasting",
-      "4.9/5 average user rating"
+      "4.9/5 average user rating",
     ],
     testimonial: {
       text: "Pulse has revolutionized how we present financial data to our clients. The interactive visualizations make complex information accessible and actionable.",
-      author: "Michael Chen, CTO of Pulse Financial"
+      author: "Michael Chen, CTO of Pulse Financial",
     },
     highlights: [
       "Real-time market data integration",
       "Customizable dashboard layouts",
       "Advanced filtering and time-series analysis",
-      "Automated report generation"
+      "Automated report generation",
     ],
     timeline: "4 months",
-    team: "3 developers, 1 data scientist, 1 UX designer"
+    team: "3 developers, 1 data scientist, 1 UX designer",
   },
   {
-    id: "horizon-travel",
-    title: "Horizon Travel App",
-    subtitle: "Your Personalized Travel Companion",
-    description: "Travel planning application with personalized recommendations and immersive experiences.",
-    tags: ["React Native", "Firebase", "ML Kit"],
-    image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
-    fullDescription: "Horizon is a mobile travel companion that offers personalized travel recommendations, itinerary planning, and immersive destination previews. The app uses machine learning to understand user preferences and provide tailored suggestions for accommodation, activities, and dining.",
-    challenge: "The travel industry needed a solution that could provide truly personalized recommendations while handling the complexity of travel planning across different cultures and destinations.",
-    solution: "We developed a React Native app with Firebase backend that utilizes ML Kit for personalization. The app includes features like AR destination previews, real-time language translation, and collaborative trip planning.",
+    id: "readers-juction-app",
+    title: "Reader's Junction App",
+    subtitle: "Personalized Digital Space for Books Collection",
+    description:
+      "Application that enables users to manage their book collections and engage with a community of book enthusiasts",
+    tags: ["Angular", "SpringBoot", "PostgreSQL"],
+    image: rja,
+    fullDescription:
+      "Horizon is a mobile travel companion that offers personalized travel recommendations, itinerary planning, and immersive destination previews. The app uses machine learning to understand user preferences and provide tailored suggestions for accommodation, activities, and dining.",
+    challenge:
+      "The travel industry needed a solution that could provide truly personalized recommendations while handling the complexity of travel planning across different cultures and destinations.",
+    solution:
+      "We developed a React Native app with Firebase backend that utilizes ML Kit for personalization. The app includes features like AR destination previews, real-time language translation, and collaborative trip planning.",
     results: [
       "500,000+ downloads in first year",
       "Average trip planning time reduced by 60%",
-      "92% of users reported discovering new experiences they wouldn't have found otherwise"
+      "92% of users reported discovering new experiences they wouldn't have found otherwise",
     ],
     testimonial: {
       text: "Horizon completely changed how I plan my trips. The personalized recommendations are spot-on, and the AR previews give me a real sense of what to expect before I arrive.",
-      author: "Elena Rodriguez, Travel Blogger"
+      author: "Elena Rodriguez, Travel Blogger",
     },
     highlights: [
       "Offline map functionality",
       "Real-time language translation",
       "AR destination previews",
-      "Collaborative trip planning"
+      "Collaborative trip planning",
     ],
     timeline: "8 months",
-    team: "4 mobile developers, 2 backend developers, 1 ML specialist, 2 UX designers"
+    team: "4 mobile developers, 2 backend developers, 1 ML specialist, 2 UX designers",
   },
   {
-    id: "nexus-workspace",
-    title: "Nexus Workspace",
-    subtitle: "Collaborative Productivity Suite",
-    description: "Collaborative platform with real-time document editing and team management tools.",
-    tags: ["Next.js", "Socket.io", "MongoDB"],
-    image: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
-    fullDescription: "Nexus Workspace is a comprehensive collaboration platform that enables teams to work together efficiently regardless of location. It includes real-time document editing, project management tools, and integrated communication features.",
-    challenge: "Remote work was creating collaboration barriers for teams, with productivity suffering due to disconnected tools and workflows.",
-    solution: "We created a unified workspace using Next.js for the frontend and Socket.io for real-time collaboration. The MongoDB backend supports flexible document structures and efficient data querying.",
+    id: "playlist-porter",
+    title: "Playlist Porter",
+    subtitle: "Transfer your Music Library",
+    description: "Easily transfers playlists from Spotify to YouTube and viceversa",
+    tags: ["Next.js", "Flask", "Material-UI"],
+    image: pp,
+    fullDescription:
+      "Nexus Workspace is a comprehensive collaboration platform that enables teams to work together efficiently regardless of location. It includes real-time document editing, project management tools, and integrated communication features.",
+    challenge:
+      "Remote work was creating collaboration barriers for teams, with productivity suffering due to disconnected tools and workflows.",
+    solution:
+      "We created a unified workspace using Next.js for the frontend and Socket.io for real-time collaboration. The MongoDB backend supports flexible document structures and efficient data querying.",
     results: [
       "32% increase in team productivity",
       "75% reduction in context-switching between tools",
-      "25,000+ teams onboarded in first year"
+      "25,000+ teams onboarded in first year",
     ],
     testimonial: {
       text: "Nexus has transformed how our distributed team works together. The real-time collaboration features make it feel like we're all in the same room.",
-      author: "David Park, Head of Operations at TechFlex"
+      author: "David Park, Head of Operations at TechFlex",
     },
     highlights: [
       "Real-time document collaboration",
       "Integrated video conferencing",
       "Customizable workflow automation",
-      "Advanced permission controls"
+      "Advanced permission controls",
     ],
     timeline: "10 months",
-    team: "6 full-stack developers, 2 UX designers, 1 DevOps specialist"
+    team: "6 full-stack developers, 2 UX designers, 1 DevOps specialist",
   },
-  {
-    id: "vitality-health",
-    title: "Vitality Health Platform",
-    subtitle: "Personalized Wellness Solution",
-    description: "Fitness tracking system with personalized workout plans and nutrition guidance.",
-    tags: ["Flutter", "GraphQL", "Django"],
-    image: "https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
-    fullDescription: "Vitality is a comprehensive health and wellness platform that combines fitness tracking, personalized workout plans, and nutrition guidance. The platform adapts to user progress and preferences to create a truly personalized health journey.",
-    challenge: "Generic fitness apps weren't providing the personalized guidance needed for users to achieve their health goals consistently.",
-    solution: "We developed a cross-platform Flutter application with a Django backend and GraphQL API. The app uses machine learning to analyze user data and adapt workout and nutrition plans accordingly.",
-    results: [
-      "87% of users reported improved fitness levels after 3 months",
-      "70% retention rate (industry average is 30%)",
-      "250,000+ registered users"
-    ],
-    testimonial: {
-      text: "Vitality is unlike any fitness app I've used before. It's like having a personal trainer and nutritionist in my pocket, adapting to my progress every step of the way.",
-      author: "Thomas Wright, Vitality User"
-    },
-    highlights: [
-      "Adaptive workout algorithms",
-      "Personalized nutrition planning",
-      "Wearable device integration",
-      "Social community features"
-    ],
-    timeline: "7 months",
-    team: "3 mobile developers, 2 backend developers, 1 nutrition specialist, 1 fitness expert"
-  },
-  {
-    id: "insight-analytics",
-    title: "Insight Analytics",
-    subtitle: "AI-Powered Business Intelligence",
-    description: "Business intelligence platform with AI-powered data analysis and reporting tools.",
-    tags: ["Angular", "Python", "TensorFlow"],
-    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80",
-    fullDescription: "Insight Analytics is an advanced business intelligence platform that uses artificial intelligence to analyze company data and generate actionable insights. The platform can identify trends, predict outcomes, and recommend strategic actions based on comprehensive data analysis.",
-    challenge: "Businesses were struggling to extract meaningful insights from their growing data repositories, with traditional BI tools requiring significant technical expertise.",
-    solution: "We built an Angular frontend with an intuitive interface for non-technical users. The Python backend uses TensorFlow for machine learning models that can analyze complex datasets and generate accessible insights.",
-    results: [
-      "Average of 23% increase in operational efficiency for client businesses",
-      "85% reduction in time spent generating reports",
-      "96% accuracy in sales forecasting"
-    ],
-    testimonial: {
-      text: "Insight has transformed how we use data to drive decisions. We're now able to identify opportunities and challenges before they become apparent through traditional analysis.",
-      author: "Amanda Rios, Data Strategy Director at GlobeEx"
-    },
-    highlights: [
-      "Natural language query processing",
-      "Automated anomaly detection",
-      "Predictive analytics dashboards",
-      "Custom report generation"
-    ],
-    timeline: "9 months",
-    team: "4 frontend developers, 3 data scientists, 2 backend developers, 1 UX specialist"
-  }
 ];
 
 interface PortfolioItemProps {
@@ -370,7 +334,7 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({ item, index, onClick }) =
       transition={{ duration: 0.7, delay: index * 0.1 }}
       viewport={{ once: true, margin: "-50px" }}
       whileHover={{ y: -10 }}
-      onClick={onClick}
+      // onClick={onClick}
     >
       {/* Image with parallax effect */}
       <motion.div
@@ -417,19 +381,19 @@ const PortfolioItem: React.FC<PortfolioItemProps> = ({ item, index, onClick }) =
           </p>
           
           {/* View details button */}
-          <div 
+          {/* <div 
             className="inline-flex items-center text-neon-cyan text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity transform group-hover:translate-x-2 duration-300 delay-150"
           >
             <span>View Project</span>
             <ArrowRight className="ml-2 w-4 h-4" />
-          </div>
+          </div> */}
         </div>
       </div>
       
       {/* Decorative elements */}
-      <div className="absolute top-4 right-4 w-8 h-8 border border-white/20 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      {/* <div className="absolute top-4 right-4 w-8 h-8 border border-white/20 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         <ExternalLink className="w-4 h-4 text-white" />
-      </div>
+      </div> */}
     </motion.div>
   );
 };
@@ -555,7 +519,7 @@ const Portfolio = forwardRef<HTMLElement>((props, ref) => {
           </motion.div>
           
           {/* Filters */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          {/* <div className="flex flex-wrap justify-center gap-3 mb-12">
             {filters.map((filter, index) => (
               <FilterTag 
                 key={filter}
@@ -565,10 +529,10 @@ const Portfolio = forwardRef<HTMLElement>((props, ref) => {
                 isDark={isDark}
               />
             ))}
-          </div>
+          </div> */}
           
           {/* Project Grid with Masonry Layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 auto-rows-fr">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-16 auto-rows-fr">
             <AnimatePresence>
               {filteredProjects.map((item, index) => (
                 <PortfolioItem 

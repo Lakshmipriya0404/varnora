@@ -69,7 +69,7 @@ export default function Home() {
         <Services ref={(el) => addToRefs(el)} />
         <Portfolio ref={(el) => addToRefs(el)} />
         <About ref={(el) => addToRefs(el)} />
-        <Testimonials ref={(el) => addToRefs(el)} />
+        {/* <Testimonials ref={(el) => addToRefs(el)} /> */}
         <Contact ref={(el) => addToRefs(el)} />
       </main>
       

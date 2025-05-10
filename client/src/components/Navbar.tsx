@@ -49,7 +49,7 @@ export default function Navbar() {
       )}>
         <div className="flex items-center">
           <Link href="/" className="text-2xl font-bold gradient-text">
-            Glacium
+            Varnora
           </Link>
         </div>
         
@@ -122,14 +122,14 @@ export default function Navbar() {
           </a>
           
           {/* Theme toggle */}
-          <div className="ml-4">
+          {/* <div className="ml-4">
             <ThemeToggle />
-          </div>
+          </div> */}
         </div>
         
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center space-x-4">
-          <ThemeToggle />
+          {/* <ThemeToggle /> */}
           <button 
             className={isDark ? "text-white" : "text-gray-800"}
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}

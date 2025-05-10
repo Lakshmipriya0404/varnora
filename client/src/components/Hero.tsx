@@ -240,21 +240,21 @@ const Hero = forwardRef<HTMLElement>((props, ref) => {
   }, [controls]);
   
   return (
-    <section 
-      id="home" 
+    <section
+      id="home"
       ref={ref}
       className="h-screen relative overflow-hidden flex items-center"
     >
       <ParticleBackground />
       <CircuitLines />
       <FloatingElements />
-      
+
       {/* Glowing Orb - accented by theme */}
       <div className="absolute top-1/3 right-1/4 w-64 h-64 rounded-full opacity-30 blur-3xl bg-electric-purple/30 animate-pulse"></div>
       <div className="absolute bottom-1/3 left-1/4 w-80 h-80 rounded-full opacity-20 blur-3xl bg-neon-cyan/20 animate-pulse"></div>
-      
+
       <div className="container mx-auto px-6 z-10 relative" ref={contentRef}>
-        <motion.div 
+        <motion.div
           className="flex flex-col items-start justify-center md:max-w-3xl"
           initial={{ opacity: 0, y: 50 }}
           animate={controls}
@@ -263,37 +263,43 @@ const Hero = forwardRef<HTMLElement>((props, ref) => {
           {/* Futuristic heading with clipped corners */}
           <div className="relative mb-6">
             <div className="absolute -inset-1 bg-gradient-to-r from-neon-cyan/50 to-electric-purple/50 rounded-md blur-md"></div>
-            <h1 className={`relative text-5xl md:text-7xl font-bold ${theme === 'dark' ? 'bg-deep-space' : 'bg-white/70'} p-2 rounded-md`}>
-              We create <span className="gradient-text">digital</span> <br/>
-              experiences that <br/>
-              <AnimatedText 
-                phrases={['inspire.', 'transform.', 'innovate.', 'elevate.']} 
+            <h1
+              className={`relative text-5xl md:text-7xl font-bold ${
+                theme === "dark" ? "bg-deep-space" : "bg-white/70"
+              } p-2 rounded-md`}
+            >
+              We create <span className="gradient-text">digital</span> <br />
+              experiences that <br />
+              <AnimatedText
+                phrases={["inspire.", "transform.", "innovate.", "elevate."]}
               />
             </h1>
           </div>
-          
-          <motion.p 
-            className={`text-lg md:text-xl mb-8 ${theme === 'dark' ? 'text-gray-300' : 'text-gray-700'} font-code pl-1 border-l-4 border-neon-cyan/60 py-2`}
+
+          <motion.p
+            className={`text-lg md:text-xl mb-8 ${
+              theme === "dark" ? "text-gray-300" : "text-gray-700"
+            } font-code pl-1 border-l-4 border-neon-cyan/60 py-2`}
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.6 }}
           >
-            A creative agency specializing in cutting-edge web development 
-            and futuristic digital solutions.
+            At Varnora, we blend color, creativity, and code to build websites
+            that leave a lasting impression.
           </motion.p>
-          
-          <motion.div 
+
+          <motion.div
             className="flex flex-col sm:flex-row gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.8 }}
           >
-            <motion.a 
+            <motion.a
               href="#contact"
               className="px-8 py-3 rounded-md animate-gradient text-white font-semibold hover:opacity-90 transition-opacity shadow-lg shadow-neon-cyan/20 relative group overflow-hidden"
               onClick={(e) => {
                 e.preventDefault();
-                scrollToSection('contact');
+                scrollToSection("contact");
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -301,13 +307,17 @@ const Hero = forwardRef<HTMLElement>((props, ref) => {
               <div className="absolute inset-0 bg-white/20 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
               <span className="relative">Get in touch</span>
             </motion.a>
-            
-            <motion.a 
+
+            <motion.a
               href="#portfolio"
-              className={`px-8 py-3 rounded-md glass ${theme === 'dark' ? 'text-white border-white/10' : 'text-gray-800 border-gray-300/30'} font-semibold transition-all border relative group overflow-hidden`}
+              className={`px-8 py-3 rounded-md glass ${
+                theme === "dark"
+                  ? "text-white border-white/10"
+                  : "text-gray-800 border-gray-300/30"
+              } font-semibold transition-all border relative group overflow-hidden`}
               onClick={(e) => {
                 e.preventDefault();
-                scrollToSection('portfolio');
+                scrollToSection("portfolio");
               }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -318,39 +328,39 @@ const Hero = forwardRef<HTMLElement>((props, ref) => {
           </motion.div>
         </motion.div>
       </div>
-      
+
       {/* Animated scroll indicator with glow effect */}
-      <motion.div 
+      <motion.div
         className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ 
-          duration: 0.5, 
-          delay: 1.2, 
-          repeat: Infinity, 
-          repeatType: "reverse" 
+        transition={{
+          duration: 0.5,
+          delay: 1.2,
+          repeat: Infinity,
+          repeatType: "reverse",
         }}
       >
         <motion.div
           className="w-8 h-12 rounded-full border-2 border-neon-cyan flex items-center justify-center relative animate-glow"
           whileHover={{ scale: 1.1 }}
         >
-          <motion.div 
+          <motion.div
             className="w-1.5 h-3 bg-neon-cyan rounded-full"
-            animate={{ 
-              y: [0, 6, 0], 
-              opacity: [0.6, 1, 0.6] 
+            animate={{
+              y: [0, 6, 0],
+              opacity: [0.6, 1, 0.6],
             }}
-            transition={{ 
-              duration: 1.5, 
+            transition={{
+              duration: 1.5,
               repeat: Infinity,
-              repeatType: "reverse" 
+              repeatType: "reverse",
             }}
           />
-          <div 
+          <div
             className="absolute -bottom-7 text-xs font-code text-neon-cyan"
-            onClick={() => scrollToSection('services')}
-            style={{ cursor: 'pointer' }}
+            onClick={() => scrollToSection("services")}
+            style={{ cursor: "pointer" }}
           >
             SCROLL
           </div>

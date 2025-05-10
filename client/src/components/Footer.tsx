@@ -43,10 +43,10 @@ export default function Footer() {
             viewport={{ once: true }}
           >
             <Link href="/" className="text-2xl font-bold gradient-text mb-4 block">
-              Glacium
+              Varnora
             </Link>
             <p className={`mb-6 ${isDark ? 'text-gray-400' : 'text-gray-600'}`}>Transforming ideas into exceptional digital experiences.</p>
-            <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>© {new Date().getFullYear()} Glacium Creative Agency. All rights reserved.</p>
+            <p className={`text-sm ${isDark ? 'text-gray-500' : 'text-gray-500'}`}>© {new Date().getFullYear()} Varnora. All rights reserved.</p>
           </motion.div>
           
           <motion.div
@@ -100,8 +100,8 @@ export default function Footer() {
               ))}
             </ul>
           </motion.div>
-          
-          <motion.div
+          {/* Newsletter */}
+          {/* <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
@@ -167,7 +167,7 @@ export default function Footer() {
                 </svg>
               </button>
             </form>
-          </motion.div>
+          </motion.div> */}
         </div>
       </div>
     </footer>

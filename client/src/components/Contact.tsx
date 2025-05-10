@@ -21,6 +21,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { apiRequest } from '@/lib/queryClient';
+// import { sendEmail } from '@/pages/api/sendEmail';
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -75,22 +76,56 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
     },
   });
 
-  function onSubmit(values: ContactFormValues) {
-    mutation.mutate(values);
+const handleSubmit = async (data: ContactFormValues) => {
+  try{
+    const res = await fetch("http://localhost:5000/api/sendEmail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        senderEmail: data.email,
+        subject: data.subject,
+        message: data.message,
+      }),
+    });
+
+    const result = await res.json();
+    if (result.data.error) {
+      toast({
+        title: "Error sending message",
+        description: "Please try again later.",
+        variant: "destructive",
+      });
+      return;
+    }
+    toast({
+      title: "Message sent!",
+      description: "We'll get back to you as soon as possible.",
+    });
+    form.reset();
+  } catch(error) {
+    toast({
+      title: "Error sending message",
+      description: "Please try again later.",
+      variant: "destructive",
+    });
   }
+};
+
 
   return (
-    <section 
-      id="contact" 
+    <section
+      id="contact"
       ref={ref}
       className={`py-20 md:py-32 ${
-        isDark 
-          ? 'bg-gradient-to-b from-deep-space to-midnight' 
-          : 'bg-gradient-to-b from-gray-50 to-gray-100'
+        isDark
+          ? "bg-gradient-to-b from-deep-space to-midnight"
+          : "bg-gradient-to-b from-gray-50 to-gray-100"
       }`}
     >
       <div className="container mx-auto px-6">
-        <motion.div 
+        <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -98,14 +133,22 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
           viewport={{ once: true, margin: "-100px" }}
         >
           <span className="font-code text-neon-cyan">&lt;contact&gt;</span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4">Get In Touch</h2>
-          <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'} max-w-2xl mx-auto`}>
-            Ready to start your next project? Reach out to discuss how we can help bring your vision to life.
+          <h2 className="text-4xl md:text-5xl font-bold mt-2 mb-4">
+            Get In Touch
+          </h2>
+          <p
+            className={`${isDark ? "text-gray-300" : "text-gray-600"} max-w-2xl mx-auto`}
+          >
+            Ready to start your next project? Reach out directly at{" "}
+            <a className="underline" href="mailto:varnoraworks@gmail.com">
+              varnoraworks@gmail.com
+            </a>{" "}
+            or through this form.
           </p>
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <motion.div 
+          <motion.div
             className="glass rounded-lg p-8 animate-glow"
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -115,7 +158,10 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
             <h3 className="text-2xl font-bold mb-6">Send us a message</h3>
 
             <Form {...form}>
-              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+              <form
+                onSubmit={form.handleSubmit(handleSubmit)}
+                className="space-y-6"
+              >
                 <FormField
                   control={form.control}
                   name="name"
@@ -123,14 +169,14 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                     <FormItem>
                       <FormLabel>Name</FormLabel>
                       <FormControl>
-                        <Input 
-                          placeholder="Your name" 
+                        <Input
+                          placeholder="Your name"
                           className={`w-full px-4 py-2 rounded-md ${
-                            isDark 
-                              ? 'bg-midnight/50 border-white/10 focus:border-neon-cyan text-white' 
-                              : 'bg-gray-100/70 border-gray-300 focus:border-electric-purple text-gray-800'
-                          } border focus:ring-2 focus:ring-neon-cyan/20 transition-all`} 
-                          {...field} 
+                            isDark
+                              ? "bg-midnight/50 border-white/10 focus:border-neon-cyan text-white"
+                              : "bg-gray-100/70 border-gray-300 focus:border-electric-purple text-gray-800"
+                          } border focus:ring-2 focus:ring-neon-cyan/20 transition-all`}
+                          {...field}
                         />
                       </FormControl>
                       <FormMessage />
@@ -145,14 +191,14 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                     <FormItem>
                       <FormLabel>Email</FormLabel>
                       <FormControl>
-                        <Input 
-                          placeholder="your@email.com" 
+                        <Input
+                          placeholder="your@email.com"
                           className={`w-full px-4 py-2 rounded-md ${
-                            isDark 
-                              ? 'bg-midnight/50 border-white/10 focus:border-neon-cyan text-white' 
-                              : 'bg-gray-100/70 border-gray-300 focus:border-electric-purple text-gray-800'
-                          } border focus:ring-2 focus:ring-neon-cyan/20 transition-all`} 
-                          {...field} 
+                            isDark
+                              ? "bg-midnight/50 border-white/10 focus:border-neon-cyan text-white"
+                              : "bg-gray-100/70 border-gray-300 focus:border-electric-purple text-gray-800"
+                          } border focus:ring-2 focus:ring-neon-cyan/20 transition-all`}
+                          {...field}
                         />
                       </FormControl>
                       <FormMessage />
@@ -167,14 +213,14 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                     <FormItem>
                       <FormLabel>Subject</FormLabel>
                       <FormControl>
-                        <Input 
-                          placeholder="What's this about?" 
+                        <Input
+                          placeholder="What's this about?"
                           className={`w-full px-4 py-2 rounded-md ${
-                            isDark 
-                              ? 'bg-midnight/50 border-white/10 focus:border-neon-cyan text-white' 
-                              : 'bg-gray-100/70 border-gray-300 focus:border-electric-purple text-gray-800'
-                          } border focus:ring-2 focus:ring-neon-cyan/20 transition-all`} 
-                          {...field} 
+                            isDark
+                              ? "bg-midnight/50 border-white/10 focus:border-neon-cyan text-white"
+                              : "bg-gray-100/70 border-gray-300 focus:border-electric-purple text-gray-800"
+                          } border focus:ring-2 focus:ring-neon-cyan/20 transition-all`}
+                          {...field}
                         />
                       </FormControl>
                       <FormMessage />
@@ -189,15 +235,15 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                     <FormItem>
                       <FormLabel>Message</FormLabel>
                       <FormControl>
-                        <Textarea 
-                          placeholder="Tell us about your project..." 
+                        <Textarea
+                          placeholder="Tell us about your project..."
                           className={`w-full px-4 py-2 rounded-md ${
-                            isDark 
-                              ? 'bg-midnight/50 border-white/10 focus:border-neon-cyan text-white' 
-                              : 'bg-gray-100/70 border-gray-300 focus:border-electric-purple text-gray-800'
+                            isDark
+                              ? "bg-midnight/50 border-white/10 focus:border-neon-cyan text-white"
+                              : "bg-gray-100/70 border-gray-300 focus:border-electric-purple text-gray-800"
                           } border focus:ring-2 focus:ring-neon-cyan/20 transition-all`}
                           rows={5}
-                          {...field} 
+                          {...field}
                         />
                       </FormControl>
                       <FormMessage />
@@ -205,8 +251,8 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                   )}
                 />
 
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   className="w-full px-8 py-3 rounded-md animate-gradient text-white font-semibold hover:opacity-90"
                   disabled={mutation.isPending}
                 >
@@ -217,7 +263,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
           </motion.div>
 
           <div>
-            <motion.div 
+            <motion.div
               className="glass rounded-lg p-8 mb-8"
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -233,7 +279,11 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                   </div>
                   <div>
                     <h4 className="font-medium">Phone</h4>
-                    <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>+1 (555) 123-4567</p>
+                    <p
+                      className={`${isDark ? "text-gray-300" : "text-gray-600"}`}
+                    >
+                      +91 9344749849
+                    </p>
                   </div>
                 </div>
 
@@ -243,7 +293,11 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                   </div>
                   <div>
                     <h4 className="font-medium">Email</h4>
-                    <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>hello@glacium.com</p>
+                    <p
+                      className={`${isDark ? "text-gray-300" : "text-gray-600"}`}
+                    >
+                      varnoraworks@gmail.com
+                    </p>
                   </div>
                 </div>
 
@@ -253,7 +307,11 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
                   </div>
                   <div>
                     <h4 className="font-medium">Location</h4>
-                    <p className={`${isDark ? 'text-gray-300' : 'text-gray-600'}`}>123 Innovation Drive, San Francisco, CA 94103</p>
+                    <p
+                      className={`${isDark ? "text-gray-300" : "text-gray-600"}`}
+                    >
+                      Chennai, India
+                    </p>
                   </div>
                 </div>
               </div>
@@ -261,23 +319,43 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
               <div className="mt-8">
                 <h4 className="font-medium mb-4">Follow Us</h4>
                 <div className="flex space-x-4">
-                  <a href="#" className={`h-10 w-10 rounded-full ${isDark ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-200/50 hover:bg-gray-200/80'} flex items-center justify-center transition-colors`}>
-                    <Twitter className={`h-5 w-5 ${isDark ? 'text-white' : 'text-gray-700'}`} />
+                  <a
+                    href="#"
+                    className={`h-10 w-10 rounded-full ${isDark ? "bg-white/5 hover:bg-white/10" : "bg-gray-200/50 hover:bg-gray-200/80"} flex items-center justify-center transition-colors`}
+                  >
+                    <Twitter
+                      className={`h-5 w-5 ${isDark ? "text-white" : "text-gray-700"}`}
+                    />
                   </a>
-                  <a href="#" className={`h-10 w-10 rounded-full ${isDark ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-200/50 hover:bg-gray-200/80'} flex items-center justify-center transition-colors`}>
-                    <Instagram className={`h-5 w-5 ${isDark ? 'text-white' : 'text-gray-700'}`} />
+                  <a
+                    href="#"
+                    className={`h-10 w-10 rounded-full ${isDark ? "bg-white/5 hover:bg-white/10" : "bg-gray-200/50 hover:bg-gray-200/80"} flex items-center justify-center transition-colors`}
+                  >
+                    <Instagram
+                      className={`h-5 w-5 ${isDark ? "text-white" : "text-gray-700"}`}
+                    />
                   </a>
-                  <a href="#" className={`h-10 w-10 rounded-full ${isDark ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-200/50 hover:bg-gray-200/80'} flex items-center justify-center transition-colors`}>
-                    <Linkedin className={`h-5 w-5 ${isDark ? 'text-white' : 'text-gray-700'}`} />
+                  <a
+                    href="#"
+                    className={`h-10 w-10 rounded-full ${isDark ? "bg-white/5 hover:bg-white/10" : "bg-gray-200/50 hover:bg-gray-200/80"} flex items-center justify-center transition-colors`}
+                  >
+                    <Linkedin
+                      className={`h-5 w-5 ${isDark ? "text-white" : "text-gray-700"}`}
+                    />
                   </a>
-                  <a href="#" className={`h-10 w-10 rounded-full ${isDark ? 'bg-white/5 hover:bg-white/10' : 'bg-gray-200/50 hover:bg-gray-200/80'} flex items-center justify-center transition-colors`}>
-                    <Github className={`h-5 w-5 ${isDark ? 'text-white' : 'text-gray-700'}`} />
+                  <a
+                    href="#"
+                    className={`h-10 w-10 rounded-full ${isDark ? "bg-white/5 hover:bg-white/10" : "bg-gray-200/50 hover:bg-gray-200/80"} flex items-center justify-center transition-colors`}
+                  >
+                    <Github
+                      className={`h-5 w-5 ${isDark ? "text-white" : "text-gray-700"}`}
+                    />
                   </a>
                 </div>
               </div>
             </motion.div>
 
-            <motion.div 
+            <motion.div
               className="glass rounded-lg p-6 h-64"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -285,9 +363,11 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
               viewport={{ once: true, margin: "-100px" }}
             >
               {/* Futuristic visualization */}
-              <div className={`w-full h-full rounded overflow-hidden ${
-                isDark ? 'bg-midnight/70' : 'bg-gray-200/70'
-              }`}>
+              <div
+                className={`w-full h-full rounded overflow-hidden ${
+                  isDark ? "bg-midnight/70" : "bg-gray-200/70"
+                }`}
+              >
                 <ContactGlobe />
               </div>
             </motion.div>
