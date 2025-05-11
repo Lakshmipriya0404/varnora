@@ -78,7 +78,7 @@ const Contact = forwardRef<HTMLElement>((props, ref) => {
 
 const handleSubmit = async (data: ContactFormValues) => {
   try{
-    const res = await fetch("http://localhost:5000/api/sendEmail", {
+    const res = await fetch("https://varnora.onrender.com/api/sendEmail", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
